@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!--Header-->
+        <title>CryptTour (SWE)</title>
+        <link rel="stylesheet" href="/style.018fc21b.css">
+        <meta name="viewport" content="width=device-with, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap">
+        <script src="/navbar.dbffeb5e.js"></script>
+        <script src="/functions.8a1c1db8.js"></script>
+    </head>
+    <body>
+        <section class="header">
+            <nav>
+                <!--Logo-->
+                <a href="/index.html"><img src="/logo.dc8e7999.svg"></a>
+                <!---------- Navigationsleiste ----------->
+                <div class="nav-links" id="nav-bar">  
+                    <i class="fa fa-close" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="/index.html">START</a></li>
+                        <li><a href="/suche.html">SUCHE</a></li>
+                        <li><a href="/tour.html">TOUR</a></li>
+                        <li><a href="/konto.html">KONTO</a></li>
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+        </section>
+        
+        <div id="main">
+            <div style="text-align: center;">
+                <input style="margin:0.5rem; font-size: 25px;" id="Suchleiste_Text" size="100px">
+                <button style="margin:0.5rem; font-size: 25px;" onclick="SearchTours();">Suchen</button>
+            </div>
+
+            <section id="Suchergebnisse">
+                <div id="SearchGrid" class="SearchGrid">
+                    <article class="SearchElement">
+                        <a href="javascript:goToTour();">
+                            <img class="SearchElementImage" src="/Berg.620650da.jpg">
+                            <div>
+                                <p>
+                                    Bezeichnung: 
+                                    <br>Strecke: Wanderweg
+                                    <br>Länge: 10km
+                                    <br>Schwierigkeit: leicht
+                                </p>
+                            </div>
+                        </a>
+                    </article>
+                    <article class="SearchElement">
+                        <a href="javascript:goToTour();">
+                            <img class="SearchElementImage" src="/Berg.620650da.jpg">
+                            <div>
+                                <p>
+                                    Bezeichnung: 
+                                    <br>Strecke: Wanderweg
+                                    <br>Länge: 10km
+                                    <br>Schwierigkeit: leicht
+                                </p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+            </section>
+        <!--Footer der Seite-->
+        <div id="footer">
+            CryptTour | Software-Engineering Projekts
+        </div>
+    </div></body>
+</html>
