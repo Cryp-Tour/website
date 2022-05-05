@@ -49,8 +49,8 @@ jobs:
           platforms: linux/amd64
           file: 'Dockerfile'
           tags: |
-            ghcr.io/cryp-tour/fronted
-            ghcr.io/cryp-tour/fronted:${{ steps.sha.outputs.sha }}
+            ghcr.io/cryp-tour/frontend
+            ghcr.io/cryp-tour/frontend:${{ steps.sha.outputs.sha }}
 
   run-server:
     name: Run on server
