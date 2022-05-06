@@ -21,17 +21,38 @@
     [ Validate ]*/
     var input = $('.validate-input .input100');
 
-    $('.validate-form').on('submit',function(){
+    $('.validate-form').on('submit',function(event){
+        event.preventDefault();
         var check = true;
+        let username, password;
 
         for(var i=0; i<input.length; i++) {
             if(validate(input[i]) == false){
                 showValidate(input[i]);
                 check=false;
+            } else {
+                if($(input[i]).attr('name') == 'username'){
+                    username = $(input[i]).val();
+                } else if ($(input[i]).attr('name') == 'pass'){
+                    password = $(input[i]).val();
+                }
             }
         }
 
-        return check;
+        if(check){
+            fetch("https://backend.cryptour.dullmer.de/user/login", {
+                method: 'POST',
+                credentials: 'include',
+                headers: new Headers({
+                "Authorization": `Basic ${btoa(`${username}:${password}`)}`,
+                }),
+            }).then(response => {
+                if (!response.ok) throw new Error(response.status);
+                window.location.href = "/";
+                return true;
+            });
+        }
+        return false;
     });
 
 
