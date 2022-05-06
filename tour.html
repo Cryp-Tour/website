@@ -3,9 +3,18 @@
 <html>
     <head>
         <title>CrypTour (SWE)</title>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <!-- Crypto Libs-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.3/web3.min.js" integrity="sha512-Ws+qbaGHSFw2Zc1e7XRpvW+kySrhmPLFYTyQ95mxAkss0sshj6ObdNP3HDWcwTs8zBJ60KpynKZywk0R8tG1GA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="/js/crypto-lib.js"></script>
+        
+        <script src="/js/tour_details.js"></script>
+
+
         <link rel="dns-prefetch" href="https://tile.openstreetmap.org">
         <link rel="dns-prefetch preconnect" href="https://unpkg.com" />
-        <meta name="viewport" content="width=device-with, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
         <!-- leaflet-ui -->
         <link rel="preload" href="https://unpkg.com/leaflet-ui@0.5.6/dist/leaflet-ui.js" as="script">
@@ -24,7 +33,7 @@
         <script src="/js/navbar.js"></script>
     </head>
 
-    <body>
+    <body onload="init_crypto()">
         <section class="header">
             <nav>
                 <!--Logo-->
@@ -46,14 +55,21 @@
         <div id="main">
         <!---------- Example Track ---------->
         <section class="sidebox">
-            <h1>Example Track</h1>
-            <p>
-                <b>Ehningen, 31.03.2022</b><br>
-                Dies ist eine Bespielbeschreibung.
-            </p>
-            <div id="map" class="leaflet-map"></div>
-            <div id="elevation-div" class="elevation-div"></div>
-            <script type="text/javascript" src="/js/tour.js"></script>
+            <h1 id="tour_name"></h1>
+            <p id="tour_description"></p>
+            <p id="tour_price"></p>
+
+            <div id="buy_buttons">
+                <button style="margin: 1rem;" onclick="buyToken()">Tour Token kaufen</button>
+                <button style="margin: 1rem;" id="button_send" disabled onclick="sendToken()">Token an Ersteller senden</button>
+            </div>
+
+            <br><br><br>
+            <div id="map_group">
+                <div id="map" class="leaflet-map"></div>
+                <div id="elevation-div" class="elevation-div"></div>
+                <script type="text/javascript" src="/js/tour.js"></script>
+            </div>
         </section>
         
         <!--Footer der Seite-->
