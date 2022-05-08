@@ -47,9 +47,15 @@
                 "Authorization": `Basic ${btoa(`${username}:${password}`)}`,
                 }),
             }).then(response => {
-                if (!response.ok) throw new Error(response.status);
-                window.location.href = "/";
-                return true;
+                if(!response.ok && response.status == 401){
+                    for(var i=0; i<input.length; i++) {
+                        showValidate(input[i]);
+                    }
+                    $('.alert-text').css('visibility', 'visible');
+                } else {
+                    window.location.href = "/konto.html";
+                    return true;
+                }
             });
         }
         return false;
