@@ -423,6 +423,13 @@ iframe {
 /*------------------------------------------------------------------
 [ Alert validate ]*/
 
+.alert-text {
+  color: #c80000;
+  text-align: center;
+  margin: 20px 0;
+  visibility: hidden;
+}
+
 .validate-input {
   position: relative;
 }

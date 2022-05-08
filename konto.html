@@ -32,8 +32,9 @@
         <div id="main">
             <!--Abschnitt Konot-->
             <section id="konto">
-                <li><a href="login.html">LOGIN</a></li>
-                <li><a href="register.html">REGISTER</a></li>
+                <li id="login-wrapper"><a href="login.html">LOGIN</a></li>
+                <li id="logout-wrapper"><a href="#" id="logout-link">LOGOUT</a></li>
+                <li id="register-wrapper"><a href="register.html">REGISTER</a></li>
                 <section class="accountdetails">
                     <h3>Accountdetails</h3>
                     <p>Acccountdaten (Email, Name, Adresse usw.)</p>
@@ -55,5 +56,7 @@
         <div id="footer">
             CrypTour | Software-Engineering Projekt
         </div>
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="js/konto.js"></script>
     </body>
 </html>
