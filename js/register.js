@@ -24,33 +24,53 @@
     $('.validate-form').on('submit',function(event){
         event.preventDefault();
         var check = true;
-        let username, password;
+        let registerData = {};
+        let password, password2;
 
         for(var i=0; i<input.length; i++) {
             if(validate(input[i]) == false){
                 showValidate(input[i]);
                 check=false;
             } else {
-                if($(input[i]).attr('name') == 'username'){
-                    username = $(input[i]).val();
-                } else if ($(input[i]).attr('name') == 'pass'){
-                    password = $(input[i]).val();
+                switch($(input[i]).attr('name')) {
+                    case 'username':
+                        registerData.username = $(input[i]).val();
+                        break;
+                    case 'pass':
+                        registerData.password = $(input[i]).val();
+                        password = $(input[i]).val();
+                        break;
+                    case 'pass2':
+                        password2 = $(input[i]).val();
+                        break;
+                    case 'email':
+                        registerData.email = $(input[i]).val();
+                        break;
+                    case 'firstname':
+                        registerData.firstname = $(input[i]).val();
+                        break;
+                    case 'surname':
+                        registerData.surname = $(input[i]).val();
+                        break;
+                    default:
                 }
             }
         }
 
+        if (password != password2){
+            check=false;
+            $('.alert-text').text("passwords not identical");
+            $('.alert-text').css('visibility', 'visible');
+        }
+
         if(check){
-            fetch("https://backend.cryptour.dullmer.de/user/login", {
+            fetch("https://backend.cryptour.dullmer.de/user", {
                 method: 'POST',
                 credentials: 'include',
-                headers: new Headers({
-                "Authorization": `Basic ${btoa(`${username}:${password}`)}`,
-                }),
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(registerData)
             }).then(response => {
-                if(!response.ok && response.status == 401){
-                    for(var i=0; i<input.length; i++) {
-                        showValidate(input[i]);
-                    }
+                if(!response.ok){
                     response.text().then(function (text) {
                         $('.alert-text').text(text);
                         $('.alert-text').css('visibility', 'visible');
