@@ -1,0 +1,72 @@
+#loggedIn-wrapper, #loggedOut-wrapper{
+    display: none;
+}
+
+.center-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+}
+
+#login-container{
+    float: left;
+    width: 300px;
+}
+
+.button-usermanagement {
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #a64bf4;
+    background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
+    background: -o-linear-gradient(left, #21d4fd, #b721ff);
+    background: -moz-linear-gradient(left, #21d4fd, #b721ff);
+    background: linear-gradient(left, #21d4fd, #b721ff);
+    display: box;
+    color: white;
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 25px;
+    float: left;
+    margin-top: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+@media (max-width: 300px) {
+    #login-container{
+        width: 98%;
+    }
+}
+
+.tab {
+    overflow: hidden;
+    border-top: 2px solid rgb(21,21,21);
+    background-color: rgb(81,81,81);
+}
+
+.tab button {
+    background-color: inherit;
+    float:left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-weight: bold;
+    color: white;
+}
+
+.tab button:hover {
+    background-color: rgb(120,120,120);
+}
+
+.tab button.active{
+    background-color: rgb(100,100,100);
+}
+
+.tabcontent {
+    display: none;
+}

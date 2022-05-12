@@ -25,13 +25,11 @@
             credentials: 'include',
         }).then(response => {
             if(!response.ok && response.status == 401){
-                $('#logout-wrapper').hide();
-                $('#login-wrapper').show();
-                $('#register-wrapper').show();
+                $('#loggedIn-wrapper').hide();
+                $('#loggedOut-wrapper').show();
             } else {
-                $('#logout-wrapper').show();
-                $('#login-wrapper').hide();
-                $('#register-wrapper').hide();
+                $('#loggedIn-wrapper').show();
+                $('#loggedOut-wrapper').hide();
             }
         });
     }

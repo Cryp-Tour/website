@@ -5,10 +5,12 @@
         <!--Header-->
         <title>CrypTour (SWE)</title>
         <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/stylesheets/konto.css">
         <meta name="viewport" content="width=device-with, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" >
         <script src="/js/navbar.js"></script>
+        <script src="/js/kontotabs.js"></script>
     </head>
     <body>
         <section class="header">
@@ -32,25 +34,55 @@
         <div id="main">
             <!--Abschnitt Konot-->
             <section id="konto">
-                <li id="login-wrapper"><a href="login.html">LOGIN</a></li>
-                <li id="logout-wrapper"><a href="#" id="logout-link">LOGOUT</a></li>
-                <li id="register-wrapper"><a href="register.html">REGISTER</a></li>
-                <section class="accountdetails">
-                    <h3>Accountdetails</h3>
-                    <p>Acccountdaten (Email, Name, Adresse usw.)</p>
-                </section>
-                <section class="zahlungen">
-                    <h3>Zahlungen</h3>
-                    <p>Zahlungsdaten, Kontostand/Guthaben (Krypto), Historie</p>
-                </section>
-                <section class="tourenInBesitz">
-                    <h3>Touren in Besitz</h3>
-                    <p>Übersicht über bezahlte Touren (Option Touren wieder zu verkaufen)</p>
-                </section>
-                <section class="absolvierteTouren">
-                    <h3>Absolvierte Touren</h3>
-                    <p>Übersicht über absolvierte Touren</p>
-                </section>
+                <div id="loggedOut-wrapper">
+                    <div class="center-container">
+                        <div id="login-container">
+                            <a class="button-usermanagement" href="login.html">LOGIN</a>
+                            <a class="button-usermanagement" href="register.html">REGISTRIEREN</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="loggedIn-wrapper">
+                    <div class="tab">
+                        <button id="defaultTab" class="tablinks" data-tab="boughtTours">gekaufte Touren</button>
+                        <button class="tablinks" data-tab="createdTours">erstellte Touren</button>
+                        <button class="tablinks" data-tab="userdata">Perönliche Daten</button>
+                    </div>
+                    <div id="boughtTours" class="tabcontent">
+                        <section class="tourenInBesitz">
+                            <h3>Touren in Besitz</h3>
+                            <p>Übersicht über bezahlte Touren</p>
+                        </section>
+                    </div>
+                    <div id="createdTours" class="tabcontent">
+                        <section class="tourenInBesitz">
+                            <h3>Touren erstellt</h3>
+                            <p>Übersicht über erstellte Touren</p>
+                        </section>
+                    </div>
+                    <div id="userdata" class="tabcontent">
+                        <div id="center-container">
+                            <div>
+                                <h3>Accountdetails</h3>
+                                <p>
+                                    <input class="user-input" name="firstname" type="text" placeholder="Vorname">
+                                    <input class="user-input" name="surname" type="text" placeholder="Nachname">
+                                    <input class="user-input" name="email" type="email" placeholder="E-Mail">
+                                    <input class="user-input" name="username" type="text" placeholder="Benutzername">
+                                    <input class="user-input" name="walletid" type="text" placeholder="Wallet-ID">
+                                    <button>Änderungen Speichern</button>
+                                </p>
+                                <p>
+                                    <input class="user-input" name="pass-old" type="password" placeholder="Altes Passwort">
+                                    <input class="user-input" name="pass" type="password" placeholder="Passwort">
+                                    <input class="user-input" name="pass2" type="password" placeholder="Passwort bestätigen">
+                                    <button>Passwort ändern</button>
+                                </p>
+                                <a class="button-usermanagement" href="#" id="logout-link">LOGOUT</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         <!--Footer der Seite-->
         <div id="footer">

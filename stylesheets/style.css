@@ -1,8 +1,9 @@
 body{
-    font-family: 'Arial, Helvetica, sans-serif';
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     background-color: rgb(255, 255, 255);
 }
+
 *{
     margin: 0;
     padding: 0;
@@ -182,38 +183,13 @@ textarea {
     margin-top: 20px;
 }
 
-/*Styling der Konto-Seite (konto.html)*/
-#konto{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    align-content: center;
-    text-align: center;
-}
-.accountdetails{
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-}
-.zahlungen{
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-}
-.tourenInBesitz{
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-}
-.absolvierteTouren{
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-}
-
 /*Styling des Footers*/
 #footer{
     position: fixed;
-    padding: 10px 10px 0px 10px;
     bottom: 0;
     width: 100%;
     height: 20px;
     text-align: center;
     color: gray;
-    padding: 16px;
+    padding: 16px 0px;
 }
