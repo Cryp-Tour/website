@@ -28,6 +28,7 @@
 
         <!--Header-->
         <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/stylesheets/tour.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" >
         <script src="/js/navbar.js"></script>
@@ -55,14 +56,30 @@
         <div id="main">
         <!---------- Example Track ---------->
         <section class="sidebox">
+            <div class="img-grid">
+                <img id="mainimage" class="mainimage" src="https://sachinchoolur.github.io/lightgallery.js/static/img/2-1600.jpg">
+                <img class="img1" src="https://sachinchoolur.github.io/lightgallery.js/static/img/2-1600.jpg">
+                <img class="img2" src="https://sachinchoolur.github.io/lightgallery.js/static/img/2-1600.jpg">
+            </div>
             <h1 id="tour_name"></h1>
-            <p id="tour_description"></p>
+            <div class="info-container">
+                <p id="tour_description"></p>
+                <div class="price-box">
+                    <p id="tour_price"><b>5 Ocean</b> ≈ 5,16€</p>
+                    <div id="buy_buttons">
+                        <button style="margin: 0.5rem; font-variant: small-caps; font-size: medium;" onclick="buyToken()">Kaufen</button>
+                        <button style="margin: 0.5rem; font-variant: small-caps; font-size: medium;" id="button_send" disabled onclick="sendToken()">Senden</button>
+                    </div>
+                    <small>Um diese Tour zu nutzen, wirst du 1 TOKEN_NAMEN kaufen und ihn sofort an den Ersteller und den Pool zurückgeben.</small>
+                </div>
+            </div>
+            <div style="display: flex; flex-direction: row; align-items: baseline; align-self: center;">
+                <p><b>Bewertung:</b> <div id="ratings">-</div> von 5 ⭐️</p>
+            </div>
             <p id="tour_price"></p>
 
-            <div id="buy_buttons">
-                <button style="margin: 1rem;" onclick="buyToken()">Tour Token kaufen</button>
-                <button style="margin: 1rem;" id="button_send" disabled onclick="sendToken()">Token an Ersteller senden</button>
-            </div>
+            
+
 
             <br><br><br>
             <div id="map_group">
