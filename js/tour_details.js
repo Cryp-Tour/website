@@ -57,9 +57,27 @@ async function init_crypto() {
     }
 }
 
-function populateSite() {
+async function populateSite() {
     tour_name.innerHTML = tour.title;
     tour_description.innerHTML = tour.description;
+
+    // Images
+    var images = tour.tourImages;
+    console.log(images);
+
+    $(".mainimage").attr("src", buildImgUrl(tour.tID, images[0].tiID));
+    $(".img1").attr("src", buildImgUrl(tour.tID, images[1].tiID));
+    $(".img2").attr("src", buildImgUrl(tour.tID, images[2].tiID));
+
+    //rating
+    var response = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/rating`);
+    var rating = (await response.json()).tourRating;
+    console.log("Rating:", rating);
+    $("#ratings")[0].innerHTML = rating;
+}
+
+function buildImgUrl(tourID, imageID) {
+    return `https://backend.cryptour.dullmer.de/tours/${tourID}/image/${imageID}`;
 }
 
 async function getPriceAndParams() {
