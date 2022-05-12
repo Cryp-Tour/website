@@ -70,17 +70,11 @@ async function getPriceAndParams() {
 
     // get recommended params for kauf???
     // TODO: was macht die 1 in .toWei??
-    CrypTourWeb.recommParamsForGetTT(tour.bpoolAddress, tour.tokenAddress, CrypTourWeb.web3Provider.utils.toWei("1"))
-        .then(res => {
-            priceWei = res.result.spotPrice.wei;
-            maxAmountIn = res.result.maxAmountIn.wei;
-            maxAmountIn = res.result.maxPrice.wei;
-        })
-        .catch((err) => {
-            console.log(err)
-        });
+    var res = await CrypTourWeb.recommParamsForGetTT(tour.bpoolAddress, tour.tokenAddress, CrypTourWeb.web3Provider.utils.toWei("1"));
+    priceWei = res.result.spotPrice.wei;
+    maxAmountIn = res.result.maxAmountIn.wei;
+    maxPrice = res.result.maxPrice.wei;
     
-
     CrypTourWeb.canConsumeTTat(tour.tokenAddress)
         .then((result) => {
             if (result.result.canConsume) {
@@ -96,7 +90,7 @@ async function checkOwnsTour() {
 }
 
 function buyToken() {
-    console.log("Buying Tour...");
+    console.log(`Buying Tour: Price in Wei: ${priceWei}; maxAmountIn: ${maxAmountIn}; maxPrice: ${maxPrice}`);
     // TODO: was macht die 1 in .toWei??
     CrypTourWeb.getTT(tour.bpoolAddress, maxAmountIn, tour.tokenAddress, CrypTourWeb.web3Provider.utils.toWei("1"), maxPrice)
     .then(res => {

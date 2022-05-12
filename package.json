@@ -4,7 +4,7 @@
   "description": "Hi guys!",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
