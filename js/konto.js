@@ -69,9 +69,6 @@
                     case "pass2":
                         pass2 = $(passwordInputs[i]).val();
                         break;
-                    case "username":
-                        submitData.username = $(passwordInputs[i]).val();
-                        break;
                 }
             }
         }
@@ -148,7 +145,6 @@
                                                 break;
                                             case "username":
                                                 $(userDataInput[j]).val(json.username);
-                                                $("#change-password #hidden-username").val(json.username);
                                                 break;
                                             case "email":
                                                 $(userDataInput[j]).val(json.email);
