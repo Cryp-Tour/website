@@ -9,7 +9,6 @@ window.onload = function () {
 }
 
 function openTab(event,tabName){
-    console.log(tabName);
     let tabcontent, tablinks;
 
     tabcontent = document.getElementsByClassName("tabcontent");

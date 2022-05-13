@@ -33,12 +33,9 @@
     box-sizing: border-box;
     line-height: 1.2;
     text-transform: uppercase;
-}
-
-@media (max-width: 300px) {
-    #login-container{
-        width: 98%;
-    }
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
 }
 
 .tab {
@@ -69,4 +66,64 @@
 
 .tabcontent {
     display: none;
+}
+
+#userdata .user-input{
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid rgb(220,220,220);
+    box-sizing: border-box;
+    padding: 8px 13px;
+    margin: 3px 0px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+#userdata .user-input-alert{
+    border-bottom: 2px solid rgb(226, 32, 32);
+}
+
+#userdata .alert-box{
+    width: 100%;
+    margin: 10px 0 0 0;
+    color: rgb(226, 32, 32);
+    display: none;
+    text-align: center;
+}
+
+#userdata .user-input:focus{
+    outline: none;
+    border-bottom: 2px solid rgb(180,180,180);
+}
+
+#userdata h3{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#userdata{
+    margin: 10px 0px;
+}
+
+#user-data-container{
+    width: 400px;
+    float:left;
+}
+
+#user-data-container .button-usermanagement{
+    margin: 10px 0 30px 0;
+}
+
+#user-data-container p {
+    margin: 20px 0px;
+}
+
+@media (max-width: 300px) {
+    #login-container{
+        width: 98%;
+    }
+
+    #user-data-container{
+        width: 98%;
+    }
 }
