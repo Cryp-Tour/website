@@ -32,17 +32,58 @@
                 showValidate(userDataInput[i]);
                 check=false;
             } else {
-                
+                hideValidate(userDataInput[i]);
+                switch($(userDataInput[i]).attr('name')) {
+                    case 'username':
+                        submitData.username = $(userDataInput[i]).val();
+                        break;
+                    case 'email':
+                        submitData.email = $(userDataInput[i]).val();
+                        break;
+                    case 'firstname':
+                        submitData.firstname = $(userDataInput[i]).val();
+                        break;
+                    case 'surname':
+                        submitData.surname = $(userDataInput[i]).val();
+                        break;
+                    case 'walletid':
+                        submitData["wallet-id"] = $(userDataInput[i]).val();
+                        break;
+                    default:
+                }
             }
         }
 
         if(check == false){
             $('#general-data .alert-box').show();
-            $('#general-data .alert-box').text("Alle rotmarkierten Felder sind ungültig");
+            $('#general-data .alert-box').text("Alle rot markierten Felder sind ungültig");
         }
         
         if(check){
-            console.log("Daten absenden");
+            fetch("https://backend.cryptour.dullmer.de/user/", {
+                method: 'PATCH',
+                credentials: 'include',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(submitData)
+            }).then(response => {
+                if(!response.ok){
+                    response.text().then(function (text) {
+                        if(text != ""){
+                            $('#general-data .alert-box').text(text);
+                        } else {
+                            $('#general-data .alert-box').text("Error");
+                        }
+                        $('#general-data .alert-box').show();
+                      });
+                } else {
+                    for(var i=0; i<userDataInput.length; i++) {
+                        hideValidate(userDataInput[i]);
+                    }
+                    $('#general-data .alert-box').hide();
+                    $('#general-data .success-box').show();
+                    return true;
+                }
+            });
         }
 
     });
@@ -58,13 +99,11 @@
                 showValidate(passwordInputs[i]);
                 check=false;
             } else {
+                hideValidate(passwordInputs[i]);
                 switch($(passwordInputs[i]).attr('name')){
-                    case "pass-old":
-                        submitData.passOld = $(passwordInputs[i]).val();
-                        break;
                     case "pass":
                         pass1 = $(passwordInputs[i]).val();
-                        submitData.passNew = $(passwordInputs[i]).val();
+                        submitData.password = $(passwordInputs[i]).val();
                         break;
                     case "pass2":
                         pass2 = $(passwordInputs[i]).val();
@@ -75,7 +114,7 @@
 
         if(check == false){
             $('#change-password .alert-box').show();
-            $('#change-password .alert-box').text("Alle rotmarkierten Felder sind ungültig");
+            $('#change-password .alert-box').text("Alle rot markierten Felder sind ungültig");
         }
 
         if (pass1 != pass2 && check){
@@ -85,13 +124,40 @@
         }
 
         if(check){
-            console.log("Daten absenden");
+            fetch("https://backend.cryptour.dullmer.de/user/updatePassword", {
+                method: 'PATCH',
+                credentials: 'include',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(submitData)
+            }).then(response => {
+                if(!response.ok){
+                    response.text().then(function (text) {
+                        if(text != ""){
+                            $('#change-password .alert-box').text(text);
+                        } else {
+                            $('#change-password .alert-box').text("Error");
+                        }
+                        $('#change-password .alert-box').show();
+                      });
+                } else {
+                    for(var i=0; i<passwordInputs.length; i++) {
+                        hideValidate(passwordInputs[i]);
+                    }
+                    $('#general-data .alert-box').hide();
+                    $('#general-data .success-box').show();
+                    return true;
+                }
+            });
         }
 
     });
 
     function showValidate(input) {
         $(input).addClass('user-input-alert');
+    }
+
+    function hideValidate(input) {
+        $(input).removeClass('user-input-alert');
     }
 
     function validate (input) {

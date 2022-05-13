@@ -91,6 +91,14 @@
     text-align: center;
 }
 
+#userdata .success-box{
+    width: 100%;
+    margin: 10px 0 0 0;
+    color: rgb(63, 189, 140);
+    display: none;
+    text-align: center;
+}
+
 #userdata .user-input:focus{
     outline: none;
     border-bottom: 2px solid rgb(180,180,180);
