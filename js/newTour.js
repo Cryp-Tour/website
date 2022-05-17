@@ -13,7 +13,20 @@ $( ".validate-tour-form" ).on('submit', async function( event ) {
 						registerData.title = $(input[i]).val();
 						break;
 					case 'difficulty':
-						registerData.duration = $(input[i]).val();
+						registerData.difficulty = $(input[i]).val();
+						if (registerData.difficulty=="leicht"){
+							registerData.difficulty = 1
+						}
+						else if (registerData.difficulty=="mittel"){
+							registerData.difficulty = 2
+						}
+						else if (registerData.difficulty=="schwer"){
+							registerData.difficulty = 3
+						}
+						else {
+							registerData.difficulty = 1
+						}
+
 						break;
 					case 'location':
 						registerData.location = $(input[i]).val();
@@ -42,7 +55,7 @@ $( ".validate-tour-form" ).on('submit', async function( event ) {
 
 	let registerData = {};
 	registerData.title = tourdata.title
-	registerData.difficulty = 2
+	registerData.difficulty = tourdata.difficulty
 	registerData.location = tourdata.location
 	registerData.distance = tourdata.distance
 	registerData.duration = tourdata.duration
