@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <!--Header-->
+        <title>CrypTour (SWE)</title>
+        <link rel="stylesheet" href="/stylesheets/style.css">
+        <meta name="viewport" content="width=device-with, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" >
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="/js/navbar.js"></script>
+        
+        
+        
+    </head>
+    <body>
+        <section class="header">
+            <nav>
+                <!--Logo-->
+                <a href="index.html"><img src="/images/logo/logo.svg"></a>
+                <!---------- Navigationsleiste ----------->
+                <div class="nav-links" id="nav-bar">  
+                    <i class="fa fa-close" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="index.html">START</a></li>
+                        <li><a href="suche.html">SUCHE</a></li>
+                        <li><a href="tour.html">TOUR</a></li>
+                        <li><a href="konto.html">KONTO</a></li>
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+        </section>
+        
+        <div id="main">
+            <!--Abschnitt Konot-->
+            <section id="createTour">
+                
+                <form id="contactForm" class="field validate-tour-form">
+                    
+                        
+                            <h1>Neue Tour erstellen</h1>
+                            <div class="field validate-tour-input">
+                                <label for="name">Name der Tour:</label>
+                                <input class="tour-input" type="text" id="name" name="name" placeholder="Name der Tour eingeben" />
+                                <small></small>
+                            </div>
+                            <div class="field validate-tour-input">
+                                <label for="difficulty">Schwierigkeit:</label>
+                                <select class="tour-input" id="difficulty" name="difficulty">
+                                    <option value="leicht">leicht</option>
+                                    <option value="mittel">mittel</option>
+                                    <option value="schwer">schwer</option>
+                                </select>
+                                <!--input class="tour-input" type="text" id="difficulty" name="difficulty" placeholder="Schwierigkeit" /-->
+                                <small></small>
+                            </div>
+                            <div class="field validate-tour-input">
+                                <label for="location">Standort:</label>
+                                <input class="tour-input" type="text" id="location" name="location" placeholder="Standort eingeben" />
+                                <small></small>
+                            </div>
+                            <div class="field validate-tour-input">
+                                <label for="distance">Länge (Kilometer):</label>
+                                <input class="tour-input" type="number" id="distance" name="distance" placeholder="Länge der Tour eingeben" />
+                                <small></small>
+                            </div>
+                            <div class="field validate-tour-input">
+                                <label for="duration">Dauer (Minuten):</label>
+                                <input class="tour-input" type="number" id="duration" name="duration" placeholder="Dauer der Tour eingeben" />
+                               
+                            </div>
+                            <div class="field validate-tour-input">
+                                <label for="description">Beschreibung:</label>
+                                <input class="tour-input" type="text" id="description" name="description" placeholder="Beschreibung der Tour eingeben" />
+                                <small></small>
+                            </div>
+                            <button type="submit" class="detail-button">submit</button>
+                            
+                    
+                    <!---input type="submit" class="form-button" value="submit"-->
+                    
+                </form>
+                
+            </section>
+        </div>
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="/js/newTour.js"></script>
+    </body>
+</html>

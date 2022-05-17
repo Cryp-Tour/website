@@ -193,3 +193,174 @@ textarea {
     color: gray;
     padding: 16px 0px;
 }
+
+#createdTours h1{
+    text-align: left;
+    margin-left: 50px;
+}
+
+#createdTours .SearchGrid{
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+    grid-row-gap: 30px;
+}
+
+
+
+.tour-container {
+    display: flex;
+   
+    
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .tour-card {
+    margin: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 300px;
+    
+  }
+  .create-card {
+      margin: 10px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      width: 300px;
+      min-height: 420px;
+      
+      display: grid;
+      
+    }
+  .tour-card-header img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  .tour-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    min-height: 100px;
+  }
+  .create-button {
+      background-color: white; 
+      color: #4b66a6; 
+      border: 2px solid #4b66a6;
+      height: 120px;
+      width: 120px;
+      
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 90px;
+      margin: auto;
+      cursor: pointer;
+      border-radius: 60px;
+    }
+  
+  .detail-button {
+      background-color: #4b66a6; /* Green */
+      border: none;
+      color: white;
+      height: 30px;
+      width: 90px;
+      padding: 5px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 0px;
+      cursor: pointer;
+      border-radius: 15px;
+    }
+  .detail-button:hover {
+      box-shadow: 0 5px 10px 0 rgba(0,0,0,0.24), 0 12px 15px 0 rgba(0,0,0,0.19);
+  }
+  
+  
+  .tour-card-body p {
+    font-size: 13px;
+    margin: 0 20 20px;
+  }
+  
+  .tour-card-body h3 {
+      color: #575a64;
+      font-size: 13px;
+      margin: 0 0 0px;
+    }
+  .tour-card-body h4 {
+      margin: 5px 0 20px;
+    }
+  #contact { 
+  /* IE10+ */
+  margin: 4em auto;
+  width: 100px; 
+  height: 30px; 
+  line-height: 30px;
+  background: teal;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid white;
+  }
+  
+  #contact:hover { background: #666; }
+  #contact:active { background: #444; }
+  
+  #contactForm { 
+  border: 0px solid grey; 
+  padding: 20px;
+  width: 50%;
+  text-align: left;
+  background: #fff;
+  }
+  
+  #contactForm b {
+      margin: 0px 0px 5px;
+  }
+  #contactForm h1 {
+      margin: 10px 0px 20px;
+      
+  }
+  
+  #contactForm input, textarea, select { 
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+      font-weight: 100;
+  }
+  
+  #contactForm .form-button {
+      background-color: #4b66a6; /* Green */
+      border: none;
+      color: white;
+      height: 30px;
+      width: 90px;
+      padding: 5px;
+      align-self: center;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 0px 0px;
+      cursor: pointer;
+      border-radius: 15px;
+      font-family: "Roboto", sans-serif;
+    }
+  
+    #contactForm .form-button:hover {
+      box-shadow: 0 5px 10px 0 rgba(0,0,0,0.24), 0 12px 15px 0 rgba(0,0,0,0.19);
+  }
+  
+  
