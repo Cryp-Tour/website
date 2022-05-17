@@ -1,26 +1,39 @@
 
 
+
 document.addEventListener('DOMContentLoaded', async function () {
-    await getCreatedTours().then(
+    await getBoughtTours().then(
         async (result) => {
             console.log(result)
             
             
             for(i=0; i<result.length; i++) {
                 image = "/images/Berg.jpg";
-                AddTourToList(image, result[i])
-                
+                AddBoughtTourToList(image, result[i])
                 //await getTourImage().then((result)=> console.log(result))
             }
-            CreateNewTour()
-
+            if (result.length==0) {
+                AddPlaceholder()
+            }
         }
     )
-    
 }, false);
 
-async function getCreatedTours () {
-    let endpoint = 'https://backend.cryptour.dullmer.de/user/createdTours'
+function AddPlaceholder() {
+    var grid = document.getElementById("SearchGridBought");
+    var image = document.createElement("img")
+    image.src = "../images/placeholder.png";
+    image.classList.add("placeholder-image")
+    
+    var container = document.createElement("div")
+    
+    container.appendChild(image)
+    grid.appendChild(container)
+
+}
+
+async function getBoughtTours () {
+    let endpoint = 'https://backend.cryptour.dullmer.de/user/boughtTours'
     const response =  await fetch(endpoint, {method:'GET',
         headers: {'Content-Type':'application/json'},
         credentials: 'include'
@@ -30,7 +43,7 @@ async function getCreatedTours () {
 }
 
 // TODO
-async function getTourImage () {
+async function getBoughtTourImage () {
     let endpoint = 'https://backend.cryptour.dullmer.de/tours/1/image/1'
     username = 'user1'
     password = 'user1'
@@ -42,46 +55,21 @@ async function getTourImage () {
         //credentials: 'user:passwd'
        })
     return response.json()
-   
 }
 
 
-function CreateNewTour() {
-    var grid = document.getElementById("SearchGrid");
-    console.log(grid);
-
-    grid.appendChild(CreateTourArticlePreviw());
-    
-    return;
-}
-function CreateTourArticlePreviw() {
-    var container = document.createElement('div');
-    var div = document.createElement('div');
-    var button = document.createElement('button');
-    container.classList.add("tour-container")
-    div.classList.add("create-card")
-    button.classList.add("create-button")
-    button.innerHTML = "+"
-    //button.onclick = function() {document.getElementById('contactForm').style.display='block'}
-    button.onclick = function() {location.href='createTour.html'}
-    div.appendChild(button)
-    container.appendChild(div)
-
-    return container
-}
-
-
-function AddTourToList(image, tour) 
+function AddBoughtTourToList(image, tour) 
 {
-    var grid = document.getElementById("SearchGrid");
+    var grid = document.getElementById("SearchGridBought");
+    
     console.log(grid);
 
-    grid.appendChild(CreateTourArticle(image, tour.title, tour.difficulty, tour.distance, tour.duration, tour.location, tour.tid));
+    grid.appendChild(CreateBoughtTourArticle(image, tour.title, tour.difficulty, tour.distance, tour.duration, tour.location, tour.tid));
     
     return;
 }
 
-function CreateTourArticle(image, name, difficulty, distance, duration, location, Tour) {
+function CreateBoughtTourArticle(image, name, difficulty, distance, duration, location, Tour) {
 
     var container = document.createElement('div');
     var div_card = document.createElement('div');
@@ -94,6 +82,8 @@ function CreateTourArticle(image, name, difficulty, distance, duration, location
     var button = document.createElement('button');
 
    
+    
+    
     img.src = image;
     container.classList.add("tour-container")
     div_card.classList.add("tour-card")
@@ -118,6 +108,7 @@ function CreateTourArticle(image, name, difficulty, distance, duration, location
 
     return container;    
 }
+
 
 function click() {
     console.log("click");
