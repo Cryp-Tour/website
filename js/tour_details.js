@@ -80,9 +80,13 @@ async function getPriceAndParams() {
     console.log("Getting Price and Params for Tour Token at", tour.tokenAddress, "and BPool Address at", tour.bpoolAddress);
     // Preis von Contract abrufen
     var result = await CrypTourWeb.getSpotPrice(tour.bpoolAddress, tour.tokenAddress);
+    var conversion_result = await (await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ocean-protocol&vs_currencies=EUR")).json();
+    console.log(conversion_result);
+    var conversion_rate = conversion_result["ocean-protocol"]["eur"];
+    console.log("Conversion rate: 1 Ocean ≈ EUR", conversion_rate);
     var ocean_price = parseFloat(result.result.spotPrice.main).toFixed(3);
-    var euro_price = 
-    tour_price[0].innerHTML = `<b>${} OCEAN</b> ≈ ??? €`;
+    var euro_price = parseFloat(ocean_price * conversion_rate).toFixed(2);
+    tour_price[0].innerHTML = `<b>${ocean_price} OCEAN</b> ≈ ${euro_price} €`;
 
     // get recommended params for kauf???
     // TODO: was macht die 1 in .toWei??
