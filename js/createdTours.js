@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             
             
             for(i=0; i<result.length; i++) {
-                image = "/images/Berg.jpg";
-                AddTourToList(image, result[i])
+                
+                AddTourToList(result[i])
                 
                 //await getTourImage().then((result)=> console.log(result))
             }
@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     
 }, false);
 
+function buildImgUrl(tourID, imageID) {
+    return `https://backend.cryptour.dullmer.de/tours/${tourID}/image/${imageID}`;
+}
+
 async function getCreatedTours () {
     let endpoint = 'https://backend.cryptour.dullmer.de/user/createdTours'
     const response =  await fetch(endpoint, {method:'GET',
@@ -27,22 +31,6 @@ async function getCreatedTours () {
         //credentials: 'user:passwd'
        })
     return response.json()
-}
-
-// TODO
-async function getTourImage () {
-    let endpoint = 'https://backend.cryptour.dullmer.de/tours/1/image/1'
-    username = 'user1'
-    password = 'user1'
-    
-    let headers = new Headers();
-    headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
-    const response =  await fetch(endpoint, {method:'GET',
-        headers: headers,
-        //credentials: 'user:passwd'
-       })
-    return response.json()
-   
 }
 
 
@@ -71,17 +59,24 @@ function CreateTourArticlePreviw() {
 }
 
 
-function AddTourToList(image, tour) 
+function AddTourToList(tour) 
 {
     var grid = document.getElementById("SearchGrid");
     console.log(grid);
 
-    grid.appendChild(CreateTourArticle(image, tour.title, tour.difficulty, tour.distance, tour.duration, tour.location, tour.tid));
+    if (tour.tourImages.length > 0) {
+        image = buildImgUrl(tour.tID, tour.tourImages[0].tiID)
+    }
+    else {
+        image = "/images/Berg.jpg";
+    }
+
+    grid.appendChild(CreateTourArticle(image, tour.title, tour.difficulty, tour.distance, tour.duration, tour.location, tour.tID));
     
     return;
 }
 
-function CreateTourArticle(image, name, difficulty, distance, duration, location, Tour) {
+function CreateTourArticle(image, name, difficulty, distance, duration, location, tid) {
 
     var container = document.createElement('div');
     var div_card = document.createElement('div');
@@ -92,6 +87,7 @@ function CreateTourArticle(image, name, difficulty, distance, duration, location
     var h4 = document.createElement('h4');
     var p = document.createElement('p');
     var button = document.createElement('button');
+
 
    
     img.src = image;
