@@ -68,4 +68,4 @@ jobs:
           script: |
             docker compose pull
             docker compose up -d
-            docker images prune
+            docker image prune
