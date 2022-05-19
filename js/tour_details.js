@@ -18,11 +18,9 @@ const params = new Proxy(new URLSearchParams(window.location.search), {
 const tourID = params.tourID;
 console.log("Tour ID von Query Parameter: ", tourID);
 
-
-// TODO: nutzen wir den Ocean token auf rinkeby oder was ganz anderes?
+// always use OCEAN Token as swap token
 const ocean_rinkeby = "0x8967BCF84170c91B0d24D4302C2376283b0B3a07";
-// aktuell der Demo Token den ich erstellt habe
-CrypTourWeb.erc20TokenIn = "0x1c325FeC9FDAb6a788B67B93079c05d9fB9D0c62";
+CrypTourWeb.erc20TokenIn = ocean_rinkeby;
 
 var tour = null;
 var priceWei = 0;
@@ -31,12 +29,10 @@ var maxAmountIn = 0;
 
 
 async function init_crypto() {
-    // TODO: auskommentieren sobald crypto auf einer öffentlichen Blockchain ist
-
-    // await CrypTourWeb.init();
-    // console.log("Inited Web Lib")
-    // await CrypTourWeb.initWallet();
-    // console.log("Connected wallet!");
+    await CrypTourWeb.init();
+    console.log("Inited Web Lib")
+    await CrypTourWeb.initWallet();
+    console.log("Connected wallet!");
 
     // Tour von Backend laden
     var response = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}`);
@@ -84,7 +80,9 @@ async function getPriceAndParams() {
     console.log("Getting Price and Params for Tour Token at", tour.tokenAddress, "and BPool Address at", tour.bpoolAddress);
     // Preis von Contract abrufen
     var result = await CrypTourWeb.getSpotPrice(tour.bpoolAddress, tour.tokenAddress);
-    tour_price.innerHTML = `${result.result.spotPrice.main} Ocean Token`;
+    var ocean_price = parseFloat(result.result.spotPrice.main).toFixed(3);
+    var euro_price = 
+    tour_price[0].innerHTML = `<b>${} OCEAN</b> ≈ ??? €`;
 
     // get recommended params for kauf???
     // TODO: was macht die 1 in .toWei??
