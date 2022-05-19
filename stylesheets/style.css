@@ -205,6 +205,11 @@ textarea {
     grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
     grid-row-gap: 30px;
 }
+.tourenInBesitz h3{
+    text-align: left;
+    margin-left: 50px;
+    margin-top: 5px;
+}
 
 
 
