@@ -41,13 +41,6 @@ img {
     margin-right: 0.25rem;
 }
 
-#tour_price {
-    margin-left: 1rem;
-}
-
-#tour_description {
-}
-
 #buy_buttons {
   display: flex;
   flex-direction: column;
@@ -72,4 +65,80 @@ img {
   border: 3px solid rgb(180, 180, 180);
   -webkit-box-shadow: 5px 5px 19px -6px rgba(0,0,0,0.52); 
   box-shadow: 5px 5px 19px -6px rgba(0,0,0,0.52);
+  padding: 1rem;
+  margin-left: 1rem;
 }
+
+button.buy {
+  margin: 0.5rem;
+  font-variant: small-caps;
+  font-size: medium;
+  
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #a64bf4;
+  background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
+  background: -o-linear-gradient(left, #21d4fd, #b721ff);
+  background: -moz-linear-gradient(left, #21d4fd, #b721ff);
+  background: linear-gradient(left, #21d4fd, #b721ff);
+  display: box;
+  color: white;
+  border-radius: 25px;
+  float: left;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 15px 20px;
+  border: none;
+}
+
+.status-error {
+  color: rgb(248, 74, 74);
+}
+
+.status-hidden {
+  display: none !important;
+}
+
+#buying_status {
+  align-self: center;
+}
+
+.status-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-content: center;
+  margin-bottom: 8px;
+}
+
+.status-container #buying-status {
+  vertical-align: middle;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  border-color: #21d4fd transparent #b721ff transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+

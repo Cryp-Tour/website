@@ -40,15 +40,10 @@ async function init_crypto() {
         tour = await response.json();
         await populateSite();
 
-        if(await checkOwnsTour()) {
-            // enable Map and disable buying
-            map_group.style.visibility = "visible";
-            buy_buttons.style.display = "none";
-        } else {
-            if (tour.bpoolAddress && tour.tokenAddress) {
-                // Crypto Parameter und Preis abrufen
-                await getPriceAndParams();
-            }
+        var owns_tour = await checkOwnsTour();
+
+        if(!owns_tour && tour.bpoolAddress && tour.tokenAddress) {
+            await getPriceAndParams();
         }
     }
 }
@@ -59,7 +54,6 @@ async function populateSite() {
 
     // Images
     var images = tour.tourImages;
-    console.log(images);
 
     $(".mainimage").attr("src", buildImgUrl(tour.tID, images[0].tiID));
     $(".img1").attr("src", buildImgUrl(tour.tID, images[1].tiID));
@@ -70,6 +64,15 @@ async function populateSite() {
     var rating = (await response.json()).tourRating;
     console.log("Rating:", rating);
     $("#ratings")[0].innerHTML = rating;
+
+    // Infos für Crypto Nerds
+    var tokenAddrLi = document.createElement("li");
+    tokenAddrLi.appendChild(document.createTextNode(`Token-Adresse: ${tour.tokenAddress}`));
+    address_ul.appendChild(tokenAddrLi);
+
+    var poolAddrLi = document.createElement("li");
+    poolAddrLi.appendChild(document.createTextNode(`Balancer Pool-Adresse: ${tour.bpoolAddress}`));
+    address_ul.appendChild(poolAddrLi);
 }
 
 function buildImgUrl(tourID, imageID) {
@@ -77,13 +80,11 @@ function buildImgUrl(tourID, imageID) {
 }
 
 async function getPriceAndParams() {
-    console.log("Getting Price and Params for Tour Token at", tour.tokenAddress, "and BPool Address at", tour.bpoolAddress);
     // Preis von Contract abrufen
     var result = await CrypTourWeb.getSpotPrice(tour.bpoolAddress, tour.tokenAddress);
     var conversion_result = await (await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ocean-protocol&vs_currencies=EUR")).json();
-    console.log(conversion_result);
     var conversion_rate = conversion_result["ocean-protocol"]["eur"];
-    console.log("Conversion rate: 1 Ocean ≈ EUR", conversion_rate);
+    console.log("Using conversion rate: 1 Ocean ≈ EUR", conversion_rate);
     var ocean_price = parseFloat(result.result.spotPrice.main).toFixed(3);
     var euro_price = parseFloat(ocean_price * conversion_rate).toFixed(2);
     tour_price[0].innerHTML = `<b>${ocean_price} OCEAN</b> ≈ ${euro_price} €`;
@@ -94,40 +95,79 @@ async function getPriceAndParams() {
     priceWei = res.result.spotPrice.wei;
     maxAmountIn = res.result.maxAmountIn.wei;
     maxPrice = res.result.maxPrice.wei;
-    
-    CrypTourWeb.canConsumeTTat(tour.tokenAddress)
-        .then((result) => {
-            if (result.result.canConsume) {
-                console.log("User already owns Tokens for this Tour. Enabling send button");
-                button_send.disabled = false;
-            }
-        });
 }
 
 async function checkOwnsTour() {
-    // TODO: GPX download und testen ob erfolgreich
-    return false;
+    var result = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/gpx`, {credentials: 'include'});
+    var owns = result.status == 200;
+    console.log("current user owns tour:", owns);
+    if (owns) {
+        map_group.style.visibility = "visible";
+        price_box.style.display = "none";
+        download_box.style.display = "block"
+    } else {
+        map_group.style.visibility = "hidden";
+        price_box.style.display = "block";
+        download_box.style.display = "none"
+    }
+    return owns;
 }
 
-function buyToken() {
-    console.log(`Buying Tour: Price in Wei: ${priceWei}; maxAmountIn: ${maxAmountIn}; maxPrice: ${maxPrice}`);
-    // TODO: was macht die 1 in .toWei??
-    CrypTourWeb.getTT(tour.bpoolAddress, maxAmountIn, tour.tokenAddress, CrypTourWeb.web3Provider.utils.toWei("1"), maxPrice)
-    .then(res => {
-        console.log("Finished tourToken buying process", res);
-        // TODO: GPX runterladen mit checkOwnsTour()
-    })
-    .catch((err) => {
-        console.log("Error buying tourToken", err);
-    })
+async function buyToken() {
+    // status anschalten
+    status_container.classList.remove("status-hidden");
+    buying_status.classList.remove("status-error");
+    buy_spinner.style.display = "inline-block";
+
+    // check ob der user schon tour token besitzt
+    var can_consume_result = await CrypTourWeb.canConsumeTTat(tour.tokenAddress)
+    console.log("User already owns TourToken?", can_consume_result.result.canConsume);
+
+    // user does not own tour, initiate tour buying
+    if (!can_consume_result.result.canConsume) {
+        buying_status.innerHTML = "Kaufe TourToken...";
+        try {
+            var buy_result = await CrypTourWeb.getTT(tour.bpoolAddress, maxAmountIn, tour.tokenAddress, CrypTourWeb.web3Provider.utils.toWei("1"), maxPrice);
+            console.log("Finished tourToken buying process", buy_result);
+        } catch (error) {
+            console.error("Error buying tour Token:", error);
+            buying_status.innerHTML = "Etwas ist schief gelaufen :(";
+            buying_status.classList.add("status-error");
+            buy_spinner.style.display = "none";
+            return;
+        }
+    }
+
+    // user owns tour token -> send to tour creator
+    buying_status.innerHTML = "Übertrage TourToken...";
+    sendToken();
 }
 
 function sendToken() {
     CrypTourWeb.consumeTT(tour.tokenAddress, tour.tID)
         .then((res) => {
             console.log("Sent Token to initial creator");
+            // GPX-Download Button anzeigen
+            checkOwnsTour();
         })
         .catch(err => {
             console.log("Error sending token to creator", err);
+            buying_status.innerHTML = "Etwas ist schief gelaufen :(";
+            buying_status.classList.add("status-error");
+            buy_spinner.style.display = "none";
         })
+}
+
+function downloadGpx() {
+    fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/gpx`, {credentials: 'include'})
+        .then(response => response.blob())
+        .then(blob => {
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = "tour.gpx";
+            document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+            a.click();    
+            a.remove();  //afterwards we remove the element again         
+        });
 }
