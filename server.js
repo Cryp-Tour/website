@@ -25,4 +25,7 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/favicon.ico', function (req, res) {
+    res.sendFile(__dirname + '/images/icons/favicon.ico');
+});
 
