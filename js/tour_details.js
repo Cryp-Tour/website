@@ -75,7 +75,7 @@ async function populateSite() {
     address_ul.appendChild(poolAddrLi);
 
     // Autor username
-    var creator_name = await fetch(`http://localhost:3030/tours/${tourID}/creator`)
+    var creator_name = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/creator`)
     tour_author.innerHTML = "Erstellt von " + await creator_name.text();
 }
 
