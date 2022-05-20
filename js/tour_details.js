@@ -73,6 +73,10 @@ async function populateSite() {
     var poolAddrLi = document.createElement("li");
     poolAddrLi.appendChild(document.createTextNode(`Balancer Pool-Adresse: ${tour.bpoolAddress}`));
     address_ul.appendChild(poolAddrLi);
+
+    // Autor username
+    var creator_name = await fetch(`http://localhost:3030/tours/${tourID}/creator`)
+    tour_author.innerHTML = "Erstellt von " + await creator_name.text();
 }
 
 function buildImgUrl(tourID, imageID) {
