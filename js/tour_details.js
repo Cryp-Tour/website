@@ -175,3 +175,22 @@ function downloadGpx() {
             a.remove();  //afterwards we remove the element again         
         });
 }
+
+function addTokenToWallet() {
+    try {
+      ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: tour.tokenAddress,
+            symbol: "CT-" + tour.tID,
+            decimals: 18,
+            image: "https://cryptour.dullmer.de/images/icons/logo.ico"
+          },
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+}
