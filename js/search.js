@@ -179,26 +179,30 @@ function CreateTourArticle(image, name, difficulty, distance, duration, location
 
    
     img.src = image;
-    container.classList.add("tour-container")
-    div_card.classList.add("tour-card")
-    div_card_header.classList.add("tour-card-header")
-    div_card_body.classList.add("tour-card-body")
-    button.classList.add("detail-button")
+    container.classList.add("tour-container");
+    div_card.classList.add("tour-card");
+    div_card_header.classList.add("tour-card-header");
+    div_card_body.classList.add("tour-card-body");
+    button.classList.add("detail-button");
+
+    button.addEventListener("click", function(){
+        window.location.href = "http://localhost:8080/tour.html?tourID="+tid;
+    });
 
     p.innerHTML = "Dauer: " + duration + " Minuten<br>Länge: " + distance + " km<br>Schwierigkeit: " + difficulty;
-    h4.innerHTML = name
-    h3.innerHTML = location
-    button.innerHTML = "Details"
+    h4.innerHTML = name;
+    h3.innerHTML = location;
+    button.innerHTML = "Details";
     //a.href = "javascript:goToTour(" + Tour + ");";
-    div_card_body.appendChild(h3)
-    div_card_body.appendChild(h4)
-    div_card_body.appendChild(p)
-    div_card_body.appendChild(button)
+    div_card_body.appendChild(h3);
+    div_card_body.appendChild(h4);
+    div_card_body.appendChild(p);
+    div_card_body.appendChild(button);
 
-    div_card_header.append(img)
-    div_card.appendChild(div_card_header)
-    div_card.appendChild(div_card_body)
-    container.appendChild(div_card)
+    div_card_header.append(img);
+    div_card.appendChild(div_card_header);
+    div_card.appendChild(div_card_body);
+    container.appendChild(div_card);
 
     return container;    
 }
