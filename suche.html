@@ -6,11 +6,12 @@
         <title>CryptTour (SWE)</title>
         <link rel="icon" type="image/x-icon" href="/images/icons/logo.ico">
         <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/stylesheets/search.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" >
         <script src="/js/navbar.js"></script>
-        <script src="/js/functions.js"></script>
+        <script src="/js/search.js"></script>
     </head>
     <body>
         <section class="header">
@@ -23,7 +24,6 @@
                     <ul>
                         <li><a href="index.html">START</a></li>
                         <li><a href="suche.html">SUCHE</a></li>
-                        <li><a href="tour.html">TOUR</a></li>
                         <li><a href="konto.html">KONTO</a></li>
                     </ul>
                 </div>
@@ -32,41 +32,47 @@
         </section>
         
         <div id="main">
-            <div style="text-align: center;">
-                <input style="margin:0.5rem; font-size: 25px;" id ="Suchleiste_Text" size = 100px></input>
-                <button style="margin:0.5rem; font-size: 25px;" onclick="SearchTours();">Suchen</button>
-            </div>
-
-            <section id="Suchergebnisse">
-                <div id="SearchGrid" class="SearchGrid">
-                    <article class="SearchElement">
-                        <a href="javascript:goToTour();">
-                            <img class="SearchElementImage" src="/images/Berg.jpg">
-                            <div>
-                                <p>
-                                    Bezeichnung: 
-                                    <br>Strecke: Wanderweg
-                                    <br>Länge: 10km
-                                    <br>Schwierigkeit: leicht
-                                </p>
+            <div id="searchbox">
+                <div id="search">
+                    <div id="popup-filter"><button id="search_filter_button">Filter</button>
+                        <span id="popup-filter-elements" style="display: none">
+                            <h4>Schwierigkeit:</h4>
+                            <select size="1" id="difficulty-min">
+                                <option selected="selected" disabled>minimale Schwierigkeit</option>
+                                <option value="1">leicht</option>
+                                <option value="2">mittel</option>
+                                <option value="3">schwer</option>
+                            </select>
+                            <select size="1" id="difficulty-max">
+                                <option selected="selected" disabled>maximale Schwierigkeit</option>
+                                <option value="1">leicht</option>
+                                <option value="2">mittel</option>
+                                <option value="3">schwer</option>
+                            </select>
+                            <h4>Länge in Kilometer:</h4>
+                            <div class="range-container">
+                                <input type="text" placeholder="minimal" id="minDist" class="twoInputs" autocomplete="off">
+                                <span>-</span>
+                                <input type="text" placeholder="maximal" id="maxDist" class="twoInputs" autocomplete="off">
                             </div>
-                        </a>
-                    </article>
-                    <article class="SearchElement">
-                        <a href="javascript:goToTour();">
-                            <img class="SearchElementImage" src="/images/Berg.jpg">
-                            <div>
-                                <p>
-                                    Bezeichnung: 
-                                    <br>Strecke: Wanderweg
-                                    <br>Länge: 10km
-                                    <br>Schwierigkeit: leicht
-                                </p>
+                            <h4>Dauer in Minuten:</h4>
+                            <div class="range-container">
+                                <input type="text" placeholder="minimal" id="minDur" class="twoInputs" autocomplete="off">
+                                <span>-</span>
+                                <input type="text" placeholder="maximal" id="maxDur" class="twoInputs" autocomplete="off">
                             </div>
-                        </a>
-                    </article>
+                            <input type="text" placeholder="Standort" id="location" autocomplete="off">
+                            <button id="filter-reset">Zurücksetzen</button>
+                        </span>
+                    </div>
+                    <input id ="search_input" placeholder="Suchbegriff" autocomplete="off">
+                    <button id="search_submit_button">Suchen</button>
                 </div>
-            </section>
+            </div>
+            <div id="results">
+                <div id="SearchGrid" class="SearchGrid">
+                </div>
+            </div>
         <!--Footer der Seite-->
         <div id="footer">
             CryptTour | Software-Engineering Projekts

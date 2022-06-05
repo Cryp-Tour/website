@@ -1,0 +1,124 @@
+*:focus {
+    outline: none;
+}
+
+select {
+    margin: 0;
+}
+
+select:not(:last-child) { 
+    margin-bottom: 5px;
+ }
+
+#searchbox {
+    width: 100%;
+}
+
+#searchbox #search {
+    width: 70%;
+    margin: 20px 15% 20px 15%;
+    display: flex;
+}
+
+#searchbox #search_submit_button {
+    border-radius: 0 5px 5px 0;
+}
+
+#searchbox #search_filter_button {
+    border-radius: 5px 0 0 5px;
+}
+
+#searchbox button {
+    border: none;
+    padding: 8px 13px;
+    cursor: pointer;
+    border: 1px solid rgb(120,120,120);
+    background: #4b66a6;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    color: white;
+}
+
+#searchbox button:hover {
+    background: #32487b;
+}
+
+#searchbox input {
+    flex-grow: 1;
+    padding: 8px 13px;
+    border: none;
+    border-radius: 0;
+    border-top: 1px solid rgb(120,120,120);
+    border-bottom: 1px solid rgb(120,120,120);
+}
+
+#searchbox button, #searchbox input {
+    display: inline-block;
+    margin: 0;
+    font-size: 16px;
+}
+
+#searchbox #popup-filter {
+    position: relative;
+}
+
+#searchbox #popup-filter #popup-filter-elements {
+    width: 400px;
+    background-color: white;
+    color: black;
+    border: 1px solid #555;
+    display: none;
+    flex-wrap: wrap;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 50%;
+    margin-left: -80px;
+    padding: 5px 10px;
+  }
+
+#searchbox #popup-filter #popup-filter-elements input {
+    border: none;
+    margin: 0;
+    background-color: rgb(245,245,245);
+    border-bottom: 1px solid rgb(120,120,120);
+}
+
+  #searchbox #popup-filter #popup-filter-elements h4 {
+      flex-basis: 100%;
+      margin: 10px 0;
+  }
+
+#searchbox #popup-filter #popup-filter-elements #location {
+    flex-basis: 100%;
+    margin: 10px 0;
+}
+
+#searchbox #popup-filter #popup-filter-elements #filter-reset {
+    border-radius: 10px;
+    border: none;
+    text-transform: none;
+}
+  
+  /* Popup arrow */
+#searchbox #popup-filter #popup-filter-elements::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 20%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #555 transparent;
+  }
+
+#results {
+    width: 100%;
+}
+
+.SearchGrid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
+}
