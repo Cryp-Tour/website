@@ -87,6 +87,22 @@
             <div style="display: flex; flex-direction: row; align-items: baseline; align-self: center;">
                 <p><b>Bewertung:</b> <div id="ratings">-</div> von 5 ⭐️</p>
             </div>
+            <div id="own_rating_div" style="display: none; flex-direction: row; align-items: center; align-self: center;">
+                <b>Eigene Bewertung abgeben:      </b>
+                <fieldset class="rating-input">
+                    <input type="radio" value="5" id="stars-star5" name="rating">
+                    <label for="stars-star5" title="5 Stars"></label>
+                    <input type="radio" value="4" id="stars-star4" name="rating">
+                    <label for="stars-star4" title="4 Stars"></label>
+                    <input type="radio" value="3" id="stars-star3" name="rating">
+                    <label for="stars-star3" title="3 Stars"></label>
+                    <input type="radio" value="2" id="stars-star2" name="rating">
+                    <label for="stars-star2" title="2 Stars"></label>
+                    <input type="radio" value="1" id="stars-star1" name="rating">
+                    <label for="stars-star1" title="1 Stars"></label>
+                  </fieldset>
+                <button id="send_rating" onclick="send_rating()" type="button">Absenden</button>
+            </div>
             <p id="tour_price"></p>
             <button class="tokenToMask" onclick="addTokenToWallet()">Tour Token in MetaMask hinzufügen</button>
 

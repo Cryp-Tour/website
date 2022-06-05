@@ -69,11 +69,10 @@ img {
   margin-left: 1rem;
 }
 
-button.buy {
+button {
   margin: 0.5rem;
   font-variant: small-caps;
   font-size: medium;
-  
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   background: #a64bf4;
@@ -91,6 +90,12 @@ button.buy {
   box-sizing: border-box;
   padding: 15px 20px;
   border: none;
+}
+
+button#send_rating {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 10px 15px;
 }
 
 button.tokenToMask {
@@ -163,3 +168,43 @@ button.tokenToMask {
   }
 }
 
+/* Bewertung abgeben */
+.rating-input > label, .rating-score > .rating-score-item {
+  display: inline-block;
+}
+.rating-input > label:after, .rating-score > .rating-score-item:after {
+  font-family: "FontAwesome";
+  font-size: 1.5em;
+  color: #FFC600;
+}
+
+.rating-input:hover > input + label:hover:after, .rating-input:hover > input + label:hover ~ input + label:after, .rating-input > input:checked ~ label:after, .rating-score[data-rating="4.5"] > .rating-score-item:nth-child(-n+4):after, .rating-score[data-rating="3.5"] > .rating-score-item:nth-child(-n+3):after, .rating-score[data-rating="2.5"] > .rating-score-item:nth-child(-n+2):after, .rating-score[data-rating="1.5"] > .rating-score-item:nth-child(-n+1):after, .rating-score[data-rating="0.5"] > .rating-score-item:nth-child(-n+0):after, .rating-score[data-rating="5"] > .rating-score-item:nth-child(-n+5):after, .rating-score[data-rating="4"] > .rating-score-item:nth-child(-n+4):after, .rating-score[data-rating="3"] > .rating-score-item:nth-child(-n+3):after, .rating-score[data-rating="2"] > .rating-score-item:nth-child(-n+2):after, .rating-score[data-rating="1"] > .rating-score-item:nth-child(-n+1):after {
+  content: "";
+}
+
+.rating-score[data-rating="4.5"] > .rating-score-item:nth-child(5):after, .rating-score[data-rating="3.5"] > .rating-score-item:nth-child(4):after, .rating-score[data-rating="2.5"] > .rating-score-item:nth-child(3):after, .rating-score[data-rating="1.5"] > .rating-score-item:nth-child(2):after, .rating-score[data-rating="0.5"] > .rating-score-item:nth-child(1):after {
+  content: "";
+}
+
+.rating-input:hover > input + label:after, .rating-input > label:after, .rating-score > .rating-score-item:after {
+  content: "";
+}
+
+.rating-score {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+}
+.rating-input {
+  border: none;
+  display: inline-flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
+}
+.rating-input > input {
+  display: none;
+}
