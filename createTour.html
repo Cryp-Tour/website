@@ -3,15 +3,16 @@
         <!--Header-->
         <title>CrypTour (SWE)</title>
         <link rel="stylesheet" href="/stylesheets/style.css">
+        <link rel="stylesheet" href="/stylesheets/createTour.css">
         <link rel="icon" type="image/x-icon" href="/images/icons/logo.ico">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" >
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script src="/js/navbar.js"></script>
-        
-        
-        
+        <!-- Crypto Libs-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.3/web3.min.js" integrity="sha512-Ws+qbaGHSFw2Zc1e7XRpvW+kySrhmPLFYTyQ95mxAkss0sshj6ObdNP3HDWcwTs8zBJ60KpynKZywk0R8tG1GA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="/js/crypto-lib.js"></script>
     </head>
     <body>
         <section class="header">
@@ -34,53 +35,58 @@
         <div id="main">
             <!--Abschnitt Konot-->
             <section id="createTour">
-                
                 <form id="contactForm" class="field validate-tour-form">
-                    
-                        
-                            <h1>Neue Tour erstellen</h1>
-                            <div class="field validate-tour-input">
-                                <label for="name">Name der Tour:</label>
-                                <input class="tour-input" type="text" id="name" name="name" placeholder="Name der Tour eingeben" />
-                                <small></small>
-                            </div>
-                            <div class="field validate-tour-input">
-                                <label for="difficulty">Schwierigkeit:</label>
-                                <select class="tour-input" id="difficulty" name="difficulty">
-                                    <option value="leicht">leicht</option>
-                                    <option value="mittel">mittel</option>
-                                    <option value="schwer">schwer</option>
-                                </select>
-                                <!--input class="tour-input" type="text" id="difficulty" name="difficulty" placeholder="Schwierigkeit" /-->
-                                <small></small>
-                            </div>
-                            <div class="field validate-tour-input">
-                                <label for="location">Standort:</label>
-                                <input class="tour-input" type="text" id="location" name="location" placeholder="Standort eingeben" />
-                                <small></small>
-                            </div>
-                            <div class="field validate-tour-input">
-                                <label for="distance">Länge (Kilometer):</label>
-                                <input class="tour-input" type="number" id="distance" name="distance" placeholder="Länge der Tour eingeben" />
-                                <small></small>
-                            </div>
-                            <div class="field validate-tour-input">
-                                <label for="duration">Dauer (Minuten):</label>
-                                <input class="tour-input" type="number" id="duration" name="duration" placeholder="Dauer der Tour eingeben" />
-                               
-                            </div>
-                            <div class="field validate-tour-input">
-                                <label for="description">Beschreibung:</label>
-                                <input class="tour-input" type="text" id="description" name="description" placeholder="Beschreibung der Tour eingeben" />
-                                <small></small>
-                            </div>
-                            <button type="submit" class="detail-button">submit</button>
-                            
-                    
-                    <!---input type="submit" class="form-button" value="submit"-->
-                    
+                    <h1>Neue Tour erstellen</h1>
+                    <div class="field validate-tour-input">
+                        <label for="name">Name der Tour:</label>
+                        <input class="tour-input" type="text" id="name" name="name" placeholder="Name der Tour eingeben" />
+                        <small></small>
+                    </div>
+                    <div class="field validate-tour-input">
+                        <label for="difficulty">Schwierigkeit:</label>
+                        <select class="tour-input" id="difficulty" name="difficulty">
+                            <option value="leicht">leicht</option>
+                            <option value="mittel">mittel</option>
+                            <option value="schwer">schwer</option>
+                        </select>
+                        <!--input class="tour-input" type="text" id="difficulty" name="difficulty" placeholder="Schwierigkeit" /-->
+                        <small></small>
+                    </div>
+                    <div class="field validate-tour-input">
+                        <label for="location">Standort:</label>
+                        <input class="tour-input" type="text" id="location" name="location" placeholder="Standort eingeben" />
+                        <small></small>
+                    </div>
+                    <div class="field validate-tour-input">
+                        <label for="distance">Länge (Kilometer):</label>
+                        <input class="tour-input" type="number" id="distance" name="distance" placeholder="Länge der Tour eingeben" />
+                        <small></small>
+                    </div>
+                    <div class="field validate-tour-input">
+                        <label for="duration">Dauer (Minuten):</label>
+                        <input class="tour-input" type="number" id="duration" name="duration" placeholder="Dauer der Tour eingeben" />
+                       
+                    </div>
+                    <div class="field validate-tour-input">
+                        <label for="description">Beschreibung:</label>
+                        <input class="tour-input" type="text" id="description" name="description" placeholder="Beschreibung der Tour eingeben" />
+                        <small></small>
+                    </div>
+                    <button type="button" class="detail-button">Tour erstellen!</button>
                 </form>
-                
+                <div id="status_container" class="status-container status-hidden">
+                    <div id="buy_spinner" class="lds-dual-ring"></div>
+                    <div id="buying_status">Hallo ich bin ein Status</div>
+                </div>
+                <p>Um eine Tour zu erstellen benötigst du eine Ethereum Wallet in
+                    <a href="https://metamask.io/" target="_blank">MetaMask</a> und einige Crypto-Coins auf dem Rinkeby Netzwerk.
+                    <br><br>
+                    Keine Sorge. Das ist alles ganz einfach und kostet dich hier zu Testzwecken kein echtes Geld.
+                    <br><br>
+                    Es werden 100 OCEAN Token benötigt, um die Tour zu erstellen. Diese bekommst du
+                    <a href="https://faucet.rinkeby.oceanprotocol.com" target="_blank">hier</a>.
+                    Außerdem benötigst du einige Ethereum Bruchstücke, um die Transaktionsgebühren zu bezahlen. Diese bekommst du
+                    <a href="https://faucet.rinkeby.oceanprotocol.com" target="_blank">hier</a>.</p>
             </section>
         </div>
         <script src="vendor/jquery/jquery-3.2.1.min.js"></script>

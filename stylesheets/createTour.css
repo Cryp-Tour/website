@@ -1,0 +1,58 @@
+.status-error {
+    color: rgb(248, 74, 74);
+  }
+  
+  .status-hidden {
+    display: none !important;
+  }
+  
+  #buying_status {
+    align-self: center;
+  }
+  
+  .status-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    margin-bottom: 8px;
+    padding: 15px;
+
+    max-width: 50vw;
+
+    background-color: rgb(226, 226, 226);
+    border-radius: 15px;
+    border: 3px solid rgb(180, 180, 180);
+    -webkit-box-shadow: 5px 5px 19px -6px rgba(0,0,0,0.52); 
+    box-shadow: 5px 5px 19px -6px rgba(0,0,0,0.52);
+  }
+  
+  .status-container #buying_status {
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+  
+  .lds-dual-ring {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    border-color: #21d4fd transparent #b721ff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

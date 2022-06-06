@@ -270,12 +270,11 @@ textarea {
     }
   
   .detail-button {
-      background-color: #4b66a6; /* Green */
+      background-color: #4b66a6;
       border: none;
       color: white;
       height: 30px;
-      width: 90px;
-      padding: 5px;
+      padding: 5px 15px;
       text-align: center;
       text-decoration: none;
       display: inline-block;

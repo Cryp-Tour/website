@@ -186,7 +186,7 @@ function CreateTourArticle(image, name, difficulty, distance, duration, location
     button.classList.add("detail-button");
 
     button.addEventListener("click", function(){
-        window.location.href = "https://cryptour.dullmer.de/tour.html?tourID="+tid;
+        window.location.href = "/tour.html?tourID="+tid;
     });
 
     p.innerHTML = "Dauer: " + duration + " Minuten<br>Länge: " + distance + " km<br>Schwierigkeit: " + difficulty;
