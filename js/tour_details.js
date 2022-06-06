@@ -54,14 +54,20 @@ async function populateSite() {
 
     // Images
     var images = tour.tourImages;
-
-    $(".mainimage").attr("src", buildImgUrl(tour.tID, images[0].tiID));
-    $(".img1").attr("src", buildImgUrl(tour.tID, images[1].tiID));
-    $(".img2").attr("src", buildImgUrl(tour.tID, images[2].tiID));
+    if (images.length >= 3) {
+        $(".mainimage").attr("src", buildImgUrl(tour.tID, images[0].tiID));
+        $(".img1").attr("src", buildImgUrl(tour.tID, images[1].tiID));
+        $(".img2").attr("src", buildImgUrl(tour.tID, images[2].tiID));
+    }
 
     //rating
     var response = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/rating`);
-    var rating = (await response.json()).tourRating;
+    var rating;
+    if (response.status == 200) {
+        rating = (await response.json()).tourRating;
+    } else {
+        rating = "-";
+    }
     console.log("Rating:", rating);
     $("#ratings")[0].innerHTML = rating;
 
