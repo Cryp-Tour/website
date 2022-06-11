@@ -1,7 +1,18 @@
+let gpxInput = document.getElementById("gpx-file");
+gpxInput.addEventListener("change", function(e){
+	if(e.target.files.length == 0){
+		gpxInput.previousElementSibling.innerHTML = "GPX-Datei auswählen";
+	} else {
+		gpxInput.previousElementSibling.innerHTML = "GPX-Datei: "+e.target.files[0].name;
+	}
+});
+
+
 
 $( ".detail-button" ).on('click', async function( event ) {
 	var inputs = $('.validate-tour-input .tour-input');
 	let registerData = {};
+	let gpxFile;
 
 	for(var i=0; i<inputs.length; i++) {
 		switch($(inputs[i]).attr('name')) {
@@ -36,16 +47,31 @@ $( ".detail-button" ).on('click', async function( event ) {
 			case 'description':
 				registerData.description = $(inputs[i]).val();
 				break;
+			case 'gpx-file':
+				gpxFile = $(inputs[i]).prop('files')[0];
+				break;
 			default:
 		}
 	}
-	var tour_id = await createTour(registerData);
-	// TODO: create images
 
-	await createCrypto(tour_id);
+	let fileparts = gpxFile.name.split('.');
+	if(fileparts[fileparts.length - 1] != "gpx"){
+		$('#file-error').text("Ungültiger Dateityp der Tourendatei.");
+	} else {
+		
+		var tour_id = await createTour(registerData);
 
-	// redirect to tour page
-	window.location.href = `/tour.html?tourID=${tour_id}`;
+		//upload tour-gpx
+		$('#file-error').text("");
+		await uploadGPXFile(tour_id,gpxFile);
+		
+		// TODO: create images
+
+		await createCrypto(tour_id);
+
+		// redirect to tour page
+		window.location.href = `/tour.html?tourID=${tour_id}`;
+	}
 });
 
 async function createTour(tourdata) {
@@ -78,6 +104,18 @@ async function getCreatorId() {
 	var json = await response.json()
 	console.log("current User ID: " + json.id)
 	return json.id
+}
+
+async function uploadGPXFile(tid,file){
+	let updatedFile = new File([file], file.name, {type: "application/gpx+xml"});
+	let endpoint = 'https://backend.cryptour.dullmer.de/tours/'+tid+'/gpx';
+	let formData = new FormData(); 
+    formData.append("file", updatedFile);
+	console.log(formData.get("file"));
+	const response =  await fetch(endpoint, {method:'POST',
+		credentials: 'include',
+		body: formData
+   	});
 }
 
 async function createCrypto(tour_id) {
