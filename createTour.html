@@ -72,6 +72,11 @@
                         <input class="tour-input" type="text" id="description" name="description" placeholder="Beschreibung der Tour eingeben" />
                         <small></small>
                     </div>
+                    <div class="field validate-tour-input">
+                        <label for="gpx-file" class="file-upload-label">GPX-Datei auswählen</label>
+                        <input class="tour-input file-upload-input" type="file" name="gpx-file" id="gpx-file">
+                    </div>
+                    <div id="file-error"></div>
                     <button type="button" class="detail-button">Tour erstellen!</button>
                 </form>
                 <div id="status_container" class="status-container status-hidden">
