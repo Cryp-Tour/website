@@ -97,6 +97,10 @@ function CreateTourArticle(image, name, difficulty, distance, duration, location
     div_card_body.classList.add("tour-card-body")
     button.classList.add("detail-button")
 
+    button.addEventListener("click", function(){
+        window.location.href = "/tour.html?tourID="+tid;
+    });
+
     p.innerHTML = "Dauer: " + duration + " Minuten<br>Länge: " + distance + " km<br>Schwierigkeit: " + difficulty;
     h4.innerHTML = name
     h3.innerHTML = location
