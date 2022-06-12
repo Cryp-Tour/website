@@ -75,8 +75,18 @@
                     <div class="field validate-tour-input">
                         <label for="gpx-file" class="file-upload-label">GPX-Datei auswählen</label>
                         <input class="tour-input file-upload-input" type="file" name="gpx-file" id="gpx-file">
+                        <div class="file-error" id="gpx-error"></div>
                     </div>
-                    <div id="file-error"></div>
+                    <div class="field validate-tour-input">
+                        <label for="description">3 Bilder der Tour auswählen:</label>
+                        <label for="img-file-1" class="file-upload-label">Bild auswählen</label>
+                        <input class="tour-input file-upload-input img-file-input" type="file" name="img-file-1" id="img-file-1">
+                        <label for="img-file-2" class="file-upload-label">Bild auswählen</label>
+                        <input class="tour-input file-upload-input img-file-input" type="file" name="img-file-2" id="img-file-2">
+                        <label for="img-file-3" class="file-upload-label">Bild auswählen</label>
+                        <input class="tour-input file-upload-input img-file-input" type="file" name="img-file-3" id="img-file-3">
+                        <div class="file-error" id="img-error"></div>
+                    </div>
                     <button type="button" class="detail-button">Tour erstellen!</button>
                 </form>
                 <div id="status_container" class="status-container status-hidden">

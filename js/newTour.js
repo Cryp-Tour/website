@@ -7,12 +7,23 @@ gpxInput.addEventListener("change", function(e){
 	}
 });
 
+let imgInputs = document.getElementsByClassName("img-file-input");
+for(let i = 0; i < imgInputs.length; i++){
+	imgInputs[i].addEventListener("change", function(e){
+		if(e.target.length == 0){
+			imgInputs[i].previousElementSibling.innerHTML = "Bild auswählen";
+		} else {
+			imgInputs[i].previousElementSibling.innerHTML = "Bild: "+e.target.files[0].name;
+		}
+	});
+}
 
 
 $( ".detail-button" ).on('click', async function( event ) {
 	var inputs = $('.validate-tour-input .tour-input');
 	let registerData = {};
 	let gpxFile;
+	let img_file_1, img_file_2, img_file_3;
 
 	for(var i=0; i<inputs.length; i++) {
 		switch($(inputs[i]).attr('name')) {
@@ -50,27 +61,48 @@ $( ".detail-button" ).on('click', async function( event ) {
 			case 'gpx-file':
 				gpxFile = $(inputs[i]).prop('files')[0];
 				break;
+			case 'img-file-1':
+				img_file_1 = $(inputs[i]).prop('files')[0];
+				break;
+			case 'img-file-2':
+				img_file_2 = $(inputs[i]).prop('files')[0];
+				break;
+			case 'img-file-3':
+				img_file_3 = $(inputs[i]).prop('files')[0];
+				break;
 			default:
 		}
 	}
 
 	let fileparts = gpxFile.name.split('.');
 	if(fileparts[fileparts.length - 1] != "gpx"){
-		$('#file-error').text("Ungültiger Dateityp der Tourendatei.");
+		$('#gpx-error').text("Ungültiger Dateityp der Tourendatei.");
 	} else {
-		
-		var tour_id = await createTour(registerData);
-
-		//upload tour-gpx
-		$('#file-error').text("");
-		await uploadGPXFile(tour_id,gpxFile);
-		
-		// TODO: create images
-
-		await createCrypto(tour_id);
-
-		// redirect to tour page
-		window.location.href = `/tour.html?tourID=${tour_id}`;
+		if(img_file_1.type !== undefined && img_file_2.type !== undefined && img_file_3.type !== undefined){
+			const img_mimetypes = ["image/jpeg", "image/svg+xml", "image/png"];
+			if(!img_mimetypes.includes(img_file_1.type) || !img_mimetypes.includes(img_file_2.type) || !img_mimetypes.includes(img_file_3.type)){
+				$('#img-error').text("Alle Dateien müssen Bilder sein.");
+			} else {
+				var tour_id = await createTour(registerData);
+	
+				//upload tour-gpx
+				$('#gpx-error').text("");
+				await uploadGPXFile(tour_id,gpxFile);
+				
+				//upload images
+				$('#img-error').text("");
+				await uploadImage(tour_id, img_file_1);
+				await uploadImage(tour_id, img_file_2);
+				await uploadImage(tour_id, img_file_3);
+	
+				await createCrypto(tour_id);
+	
+				// redirect to tour page
+				window.location.href = `/tour.html?tourID=${tour_id}`;
+			}
+		} else {
+			$('#img-error').text("Es müssen 3 Bilder hochgeladen werden.");
+		}
 	}
 });
 
@@ -111,7 +143,16 @@ async function uploadGPXFile(tid,file){
 	let endpoint = 'https://backend.cryptour.dullmer.de/tours/'+tid+'/gpx';
 	let formData = new FormData(); 
     formData.append("file", updatedFile);
-	console.log(formData.get("file"));
+	const response =  await fetch(endpoint, {method:'POST',
+		credentials: 'include',
+		body: formData
+   	});
+}
+
+async function uploadImage(tid,file){
+	let endpoint = 'https://backend.cryptour.dullmer.de/tours/'+tid+'/image';
+	let formData = new FormData();
+    formData.append("file", file);
 	const response =  await fetch(endpoint, {method:'POST',
 		credentials: 'include',
 		body: formData
