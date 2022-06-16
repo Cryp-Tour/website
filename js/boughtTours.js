@@ -8,7 +8,12 @@ document.addEventListener('DOMContentLoaded', async function () {
             
             
             for(i=0; i<result.length; i++) {
-                image = "/images/Berg.jpg";
+                if (result[i].tourImages.length > 0) {
+                    image = buildImgUrl(result[i].tID, result[i].tourImages[0].tiID)
+                }
+                else {
+                    image = "/images/Berg.jpg";
+                }
                 AddBoughtTourToList(image, result[i])
                 //await getTourImage().then((result)=> console.log(result))
             }
@@ -18,6 +23,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     )
 }, false);
+
+function buildImgUrl(tourID, imageID) {
+    return `https://backend.cryptour.dullmer.de/tours/${tourID}/image/${imageID}`;
+}
 
 function AddPlaceholder() {
     var grid = document.getElementById("SearchGridBought");
@@ -64,12 +73,12 @@ function AddBoughtTourToList(image, tour)
     
     console.log(grid);
 
-    grid.appendChild(CreateBoughtTourArticle(image, tour.title, tour.difficulty, tour.distance, tour.duration, tour.location, tour.tid));
+    grid.appendChild(CreateBoughtTourArticle(image, tour.title, tour.difficulty, tour.distance, tour.duration, tour.location, tour.tID));
     
     return;
 }
 
-function CreateBoughtTourArticle(image, name, difficulty, distance, duration, location, Tour) {
+function CreateBoughtTourArticle(image, name, difficulty, distance, duration, location, tid) {
 
     var container = document.createElement('div');
     var div_card = document.createElement('div');
