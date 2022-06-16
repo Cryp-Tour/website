@@ -26,13 +26,25 @@ var tour = null;
 var priceWei = 0;
 var maxPrice = 0;
 var maxAmountIn = 0;
+var cryptoWorking = false;
 
 
 async function init_crypto() {
-    await CrypTourWeb.init();
-    console.log("Inited Web Lib")
-    await CrypTourWeb.initWallet();
-    console.log("Connected wallet!");
+    try{
+        await CrypTourWeb.init();
+        console.log("Inited Web Lib")
+        await CrypTourWeb.initWallet();
+        console.log("Connected wallet!");
+        cryptoWorking = true;
+    } catch {
+        cryptoWorking = false;
+    }
+
+    if(!cryptoWorking){
+        tokenToMaskButton.style.display = "none";
+    } else {
+        tokenToMaskButton.style.display = "block";
+    }
 
     // Tour von Backend laden
     var response = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}`);
@@ -43,7 +55,9 @@ async function init_crypto() {
         var owns_tour = await checkOwnsTour();
 
         if(!owns_tour && tour.bpoolAddress && tour.tokenAddress) {
-            await getPriceAndParams();
+            if(cryptoWorking){
+                await getPriceAndParams();
+            }
         }
     }
 }
@@ -125,15 +139,24 @@ async function checkOwnsTour() {
     var result = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/gpx`, {credentials: 'include'});
     var owns = result.status == 200;
     console.log("current user owns tour:", owns);
-    if (owns) {
-        map_group.style.display = "block";
-        price_box.style.display = "none";
-        download_box.style.display = "block"
-    } else {
-        map_group.style.display = "none";
-        price_box.style.display = "block";
-        download_box.style.display = "none"
-    }
+        if (owns) {
+            map_group.style.display = "block";
+            price_box.style.display = "none";
+            download_box.style.display = "block";
+            error_box.style.display = "none";
+        } else {
+            if (cryptoWorking){
+                map_group.style.display = "none";
+                price_box.style.display = "block";
+                download_box.style.display = "none";
+                error_box.style.display = "none";
+            } else {
+                map_group.style.display = "none";
+                price_box.style.display = "none";
+                download_box.style.display = "none";
+                error_box.style.display = "block";
+            }
+        }
     return owns;
 }
 

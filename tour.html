@@ -82,6 +82,10 @@
                         <button type="button" onclick="downloadGpx()" class="buy">GPX herunterladen</button>
                     </div>
                 </div>
+
+                <div id="error_box" class="price-box" style="display: none; color: red;">
+                    Bitte richten Sie MetaMask ein, damit Sie die Tour kaufen können.
+                </div>
             </div>
             <p style="align-self: center;" id="tour_author"></p>
             <div style="display: flex; flex-direction: row; align-items: baseline; align-self: center;">
@@ -104,7 +108,7 @@
                 <button id="send_rating" onclick="send_rating()" type="button">Absenden</button>
             </div>
             <p id="tour_price"></p>
-            <button class="tokenToMask" onclick="addTokenToWallet()">Tour Token in MetaMask hinzufügen</button>
+            <button class="tokenToMask" onclick="addTokenToWallet()" id="tokenToMaskButton">Tour Token in MetaMask hinzufügen</button>
 
             
 
