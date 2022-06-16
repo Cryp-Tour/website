@@ -141,43 +141,53 @@ textarea {
     background-size: cover;
     height: 100vh;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .info-allgemein{
     padding: 20px;
     text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 3px;
 }
+
 /*Über uns*/
 .about{
     margin: 0;
-    height: 500px;
     width: 100%;
-    background-color: white;
     color: black;
+    padding: 10px;
+    box-sizing: border-box;
 }
 .about-text{
     text-align: center;
     font-size: 50px;
 }
-.card1{
-    width: 300px;
-    height: 350px;
-    margin-left: 35%;
-    margin-top: 50px;
-    text-align: center;
-    float: left;
-    background: lightslategray;
+
+.cards {
+    display: flex;
+    justify-content: space-around;
+    margin: 50px 0;
+    flex-wrap: wrap;
 }
-.card2{
-    width: 300px;
-    height: 350px;
-    margin-right: 35%;
-    margin-top: 50px;
+
+.card-common{
     text-align: center;
-    float: right;
     background: lightslategray;
+    border-radius: 3px;
+    padding: 5px;
+    box-sizing: border-box;
+    flex: 0 1 30%;
+    margin-top: 20px;
+    padding-bottom: 50px;
 }
+
 .cards h4{
-    margin-top: 50px;
+    margin-top: 20px;
+    font-size: 25px;
 }
 .cards p{
     margin-top: 20px;
