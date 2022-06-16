@@ -65,6 +65,21 @@ async function init_crypto() {
 async function populateSite() {
     tour_name.innerHTML = tour.title;
     tour_description.innerHTML = tour.description;
+    let difficulty;
+    switch(tour.difficulty){
+        case(1):
+            difficulty = "leicht";
+            break;
+        case(2):
+            difficulty = "mittel";
+            break;
+        case(3):
+            difficulty = "schwer";
+            break;
+        default:
+            difficulty = "unbekannt";
+    }
+    infos.innerHTML = "Dauer: "+tour.duration+" Minuten <br> Länge: "+tour.distance+" km <br> Schwierigkeit: "+difficulty;
 
     // Images
     var images = tour.tourImages;
