@@ -207,9 +207,6 @@ iframe {
   line-height: 1.2;
   text-align: center;
 }
-.login100-form-title i {
-  font-size: 60px;
-}
 
 /*------------------------------------------------------------------
 [ Input ]*/
@@ -489,5 +486,6 @@ iframe {
   }
 }
 
+.text-center {text-align: center;}
 
 
