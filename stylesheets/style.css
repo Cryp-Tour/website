@@ -467,3 +467,7 @@ textarea {
 .modalButton#delete-submit-button {
     background-color:rgb(219, 67, 67);
 }
+
+button {
+    cursor: pointer;
+}

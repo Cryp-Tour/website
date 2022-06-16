@@ -166,6 +166,9 @@ async function buyToken() {
     buying_status.classList.remove("status-error");
     buy_spinner.style.display = "inline-block";
 
+    buying_status.innerHTML = "TourToken in MetaMaks hinzufügen...";
+    addTokenToWallet();
+
     // check ob der user schon tour token besitzt
     var can_consume_result = await CrypTourWeb.canConsumeTTat(tour.tokenAddress)
     console.log("User already owns TourToken?", can_consume_result.result.canConsume);
