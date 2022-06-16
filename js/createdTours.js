@@ -116,6 +116,20 @@ function CreateTourArticle(image, name, difficulty, distance, duration, location
         document.body.classList.add('disable-scroll');
     })
 
+    switch(difficulty){
+        case(1):
+            difficulty = "leicht";
+            break;
+        case(2):
+            difficulty = "mittel";
+            break;
+        case(3):
+            difficulty = "schwer";
+            break;
+        default:
+            difficulty = "unbekannt";
+    }
+
     p.innerHTML = "Dauer: " + duration + " Minuten<br>Länge: " + distance + " km<br>Schwierigkeit: " + difficulty;
     h4.innerHTML = name
     h3.innerHTML = location
