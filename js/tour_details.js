@@ -81,7 +81,7 @@ async function populateSite() {
         default:
             difficulty = "unbekannt";
     }
-    infos.innerHTML = "Dauer: "+tour.duration+" Minuten <br> Länge: "+tour.distance+" km <br> Schwierigkeit: "+difficulty;
+    infos.innerHTML = "<b>Dauer:</b> "+tour.duration+" Minuten <br> <b>Länge:</b> "+tour.distance+" km <br> <b>Schwierigkeit:</b> "+difficulty;
 
     // Images
     var images = tour.tourImages;
