@@ -60,6 +60,8 @@ async function init_crypto() {
             }
         }
     }
+
+    loadGPX();
 }
 
 async function populateSite() {
@@ -206,6 +208,35 @@ async function buyToken() {
     // user owns tour token -> send to tour creator
     buying_status.innerHTML = "Übertrage TourToken...";
     sendToken();
+}
+
+function loadGPX(){
+    let opts = {
+        map: {
+            center: [41.4583, 12.7059],
+            zoom: 5,
+            fullscreenControl: false,
+            resizerControl: true,
+            preferCanvas: false,
+            rotate: true,
+            // bearing: 45,
+            rotateControl: {
+                closeOnZeroBearing: true
+            },
+        },
+        layersControl: {
+            options: {
+                collapsed: false,
+            },
+        },
+    };
+    
+    let map = L.map('map', opts.map);
+    let gpx = `https://backend.cryptour.dullmer.de/tours/${tourID}/gpx`;
+    let controlLayer = L.control.layers(null, null, opts.layersControl.options);
+    new L.GPX(gpx, {async: true}).on('loaded', function(e) {
+        map.fitBounds(e.target.getBounds());
+      }).addTo(map);
 }
 
 function sendToken() {
