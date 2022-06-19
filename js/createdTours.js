@@ -26,11 +26,11 @@ document.addEventListener('DOMContentLoaded', async function () {
 }, false);
 
 function buildImgUrl(tourID, imageID) {
-    return `https://backend.cryptour.dullmer.de/tours/${tourID}/image/${imageID}`;
+    return `${window.BASEURL}/tours/${tourID}/image/${imageID}`;
 }
 
 async function getCreatedTours () {
-    let endpoint = 'https://backend.cryptour.dullmer.de/user/createdTours'
+    let endpoint = window.BASEURL+'/user/createdTours'
     const response =  await fetch(endpoint, {method:'GET',
         headers: {'Content-Type':'application/json'},
         credentials: 'include'
@@ -153,7 +153,7 @@ function CreateTourArticle(image, name, difficulty, distance, duration, location
 async function deleteTour(){
     tour_id = this.dataset.tourID;
 
-    let endpoint = 'https://backend.cryptour.dullmer.de/tours/'+tour_id;
+    let endpoint = window.BASEURL+'/tours/'+tour_id;
 
     const response =  await fetch(endpoint, {method:'delete',
 		credentials: 'include'

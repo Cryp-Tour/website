@@ -107,7 +107,7 @@ $( ".detail-button" ).on('click', async function( event ) {
 });
 
 async function createTour(tourdata) {
-	let endpoint = 'https://backend.cryptour.dullmer.de/tours'
+	let endpoint = window.BASEURL+'/tours'
 
 	let postTourData = {};
 	postTourData.title = tourdata.title
@@ -129,7 +129,7 @@ async function createTour(tourdata) {
 }
 
 async function getCreatorId() {
-	let endpoint = 'https://backend.cryptour.dullmer.de/user'
+	let endpoint = window.BASEURL+'/user'
 	const response =  await fetch(endpoint, {method:'GET',
 		credentials: 'include'
    	});
@@ -140,7 +140,7 @@ async function getCreatorId() {
 
 async function uploadGPXFile(tid,file){
 	let updatedFile = new File([file], file.name, {type: "application/gpx+xml"});
-	let endpoint = 'https://backend.cryptour.dullmer.de/tours/'+tid+'/gpx';
+	let endpoint = window.BASEURL+'/tours/'+tid+'/gpx';
 	let formData = new FormData(); 
     formData.append("file", updatedFile);
 	const response =  await fetch(endpoint, {method:'POST',
@@ -150,7 +150,7 @@ async function uploadGPXFile(tid,file){
 }
 
 async function uploadImage(tid,file){
-	let endpoint = 'https://backend.cryptour.dullmer.de/tours/'+tid+'/image';
+	let endpoint = window.BASEURL+'/tours/'+tid+'/image';
 	let formData = new FormData();
     formData.append("file", file);
 	const response =  await fetch(endpoint, {method:'POST',
@@ -209,7 +209,7 @@ async function addTokenToWallet(token_addr, symbol) {
 			  address: token_addr,
 			  symbol: symbol,
 			  decimals: 18,
-			  image: "https://cryptour.dullmer.de/images/icons/logo.ico"
+			  image: window.BASEURL+"/images/icons/logo.ico"
 			},
 		  },
 		});

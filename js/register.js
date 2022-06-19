@@ -64,7 +64,7 @@
         }
 
         if(check){
-            fetch("https://backend.cryptour.dullmer.de/user", {
+            fetch(window.BASEURL+"/user", {
                 method: 'POST',
                 credentials: 'include',
                 headers: {'Content-Type': 'application/json'},

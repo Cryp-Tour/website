@@ -8,7 +8,7 @@
 
     $( "#logout-link" ).on( "click", async function(event){
         event.preventDefault();
-        await fetch("https://backend.cryptour.dullmer.de/user/logout", {
+        await fetch(window.BASEURL+"/user/logout", {
             method: 'post',
             credentials: 'include',
         }).then(response => {
@@ -60,7 +60,7 @@
         }
         
         if(check){
-            fetch("https://backend.cryptour.dullmer.de/user/", {
+            fetch(window.BASEURL+"/user/", {
                 method: 'PATCH',
                 credentials: 'include',
                 headers: {'Content-Type': 'application/json'},
@@ -124,7 +124,7 @@
         }
 
         if(check){
-            fetch("https://backend.cryptour.dullmer.de/user/updatePassword", {
+            fetch(window.BASEURL+"/user/updatePassword", {
                 method: 'PATCH',
                 credentials: 'include',
                 headers: {'Content-Type': 'application/json'},
@@ -176,7 +176,7 @@
     }
 
     function setLoginButton () {
-        fetch("https://backend.cryptour.dullmer.de/user/loggedin", {
+        fetch(window.BASEURL+"/user/loggedin", {
             method: 'get',
             credentials: 'include',
         }).then(response => {
@@ -195,7 +195,7 @@
             for(let i = 0; i < mutationsList.length; i++){
                 if (mutationsList[i].type === "attributes" && mutationsList[i].attributeName === "style"){
                     if($('#userdata')[0].style.display == "block"){
-                        fetch("https://backend.cryptour.dullmer.de/user", {
+                        fetch(window.BASEURL+"/user", {
                             method: 'get',
                             credentials: 'include',
                         }).then(response =>{

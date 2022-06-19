@@ -112,7 +112,7 @@ function subSetTour(){
             }
         }
     }
-    fetch("https://backend.cryptour.dullmer.de/tours?" + new URLSearchParams(params), {
+    fetch(window.BASEURL+"/tours?" + new URLSearchParams(params), {
         method: 'GET',
     }).then(response => {
         response.text().then(function (text) {
@@ -125,7 +125,7 @@ function subSetTour(){
 }
 
 function buildImgUrl(tourID, imageID) {
-    return `https://backend.cryptour.dullmer.de/tours/${tourID}/image/${imageID}`;
+    return `${window.BASEURL}/tours/${tourID}/image/${imageID}`;
 }
 
 function AddTourToList(tour) 
