@@ -40,7 +40,7 @@
         }
 
         if(check){
-            fetch("https://backend.cryptour.dullmer.de/user/login", {
+            fetch(window.BASEURL+"/user/login", {
                 method: 'POST',
                 credentials: 'include',
                 headers: new Headers({

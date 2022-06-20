@@ -1,0 +1,1 @@
+window.BASEURL = "https://backend.cryptour.dullmer.de";

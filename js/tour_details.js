@@ -47,7 +47,7 @@ async function init_crypto() {
     }
 
     // Tour von Backend laden
-    var response = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}`);
+    var response = await fetch(`${window.BASEURL}/tours/${tourID}`);
     if (response.status == 200) {
         tour = await response.json();
         await populateSite();
@@ -92,7 +92,7 @@ async function populateSite() {
     }
 
     //rating
-    var response = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/rating`);
+    var response = await fetch(`${window.BASEURL}/tours/${tourID}/rating`);
     var rating;
     if (response.status == 200) {
         rating = (await response.json()).tourRating;
@@ -112,11 +112,11 @@ async function populateSite() {
     address_ul.appendChild(poolAddrLi);
 
     // Autor username
-    var creator_name = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/creator`)
+    var creator_name = await fetch(`${window.BASEURL}/tours/${tourID}/creator`)
     tour_author.innerHTML = "Erstellt von " + await creator_name.text();
 
     // enable rating if signed in
-    fetch("https://backend.cryptour.dullmer.de/user/loggedin", {
+    fetch(window.BASEURL+"/user/loggedin", {
             method: 'get',
             credentials: 'include',
         }).then(response => {
@@ -131,7 +131,7 @@ async function populateSite() {
 }
 
 function buildImgUrl(tourID, imageID) {
-    return `https://backend.cryptour.dullmer.de/tours/${tourID}/image/${imageID}`;
+    return `${window.BASEURL}/tours/${tourID}/image/${imageID}`;
 }
 
 async function getPriceAndParams() {
@@ -153,7 +153,7 @@ async function getPriceAndParams() {
 }
 
 async function checkOwnsTour() {
-    var result = await fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/gpx`, {credentials: 'include'});
+    var result = await fetch(`${window.BASEURL}/tours/${tourID}/gpx`, {credentials: 'include'});
     var owns = result.status == 200;
     console.log("current user owns tour:", owns);
         if (owns) {
@@ -232,7 +232,7 @@ function loadGPX(){
     };
     
     let map = L.map('map', opts.map);
-    let gpx = `https://backend.cryptour.dullmer.de/tours/${tourID}/gpx`;
+    let gpx = `${window.BASEURL}/tours/${tourID}/gpx`;
     let controlLayer = L.control.layers(null, null, opts.layersControl.options);
     new L.GPX(gpx, {async: true}).on('loaded', function(e) {
         map.fitBounds(e.target.getBounds());
@@ -255,7 +255,7 @@ function sendToken() {
 }
 
 function downloadGpx() {
-    fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/gpx`, {credentials: 'include'})
+    fetch(`${window.BASEURL}/tours/${tourID}/gpx`, {credentials: 'include'})
         .then(response => response.blob())
         .then(blob => {
             var url = window.URL.createObjectURL(blob);
@@ -278,7 +278,7 @@ function addTokenToWallet() {
             address: tour.tokenAddress,
             symbol: "CT-" + tour.tID,
             decimals: 18,
-            image: "https://cryptour.dullmer.de/images/icons/logo.ico"
+            image: window.BASEURL+"/images/icons/logo.ico"
           },
         },
       });
@@ -294,6 +294,6 @@ function send_rating() {
         rating: parseInt(rating_numer)
     };
 
-    fetch(`https://backend.cryptour.dullmer.de/tours/${tourID}/rating`,
+    fetch(`${window.BASEURL}/tours/${tourID}/rating`,
         {credentials: 'include', method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(rating_obj)});
 }

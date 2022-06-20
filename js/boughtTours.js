@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 }, false);
 
 function buildImgUrl(tourID, imageID) {
-    return `https://backend.cryptour.dullmer.de/tours/${tourID}/image/${imageID}`;
+    return `${window.BASEURL}/tours/${tourID}/image/${imageID}`;
 }
 
 function AddPlaceholder() {
@@ -42,25 +42,10 @@ function AddPlaceholder() {
 }
 
 async function getBoughtTours () {
-    let endpoint = 'https://backend.cryptour.dullmer.de/user/boughtTours'
+    let endpoint = window.BASEURL+'/user/boughtTours'
     const response =  await fetch(endpoint, {method:'GET',
         headers: {'Content-Type':'application/json'},
         credentials: 'include'
-        //credentials: 'user:passwd'
-       })
-    return response.json()
-}
-
-// TODO
-async function getBoughtTourImage () {
-    let endpoint = 'https://backend.cryptour.dullmer.de/tours/1/image/1'
-    username = 'user1'
-    password = 'user1'
-    
-    let headers = new Headers();
-    headers.set('Authorization', 'Basic ' + btoa(username + ":" + password));
-    const response =  await fetch(endpoint, {method:'GET',
-        headers: headers,
         //credentials: 'user:passwd'
        })
     return response.json()
