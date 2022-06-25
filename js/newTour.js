@@ -209,7 +209,7 @@ async function addTokenToWallet(token_addr, symbol) {
 			  address: token_addr,
 			  symbol: symbol,
 			  decimals: 18,
-			  image: window.BASEURL+"/images/icons/logo.ico"
+			  image: "https://cryptour.dullmer.de/images/icons/logo.ico"
 			},
 		  },
 		});

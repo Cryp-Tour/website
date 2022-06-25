@@ -278,7 +278,7 @@ function addTokenToWallet() {
             address: tour.tokenAddress,
             symbol: "CT-" + tour.tID,
             decimals: 18,
-            image: window.BASEURL+"/images/icons/logo.ico"
+            image: "https://cryptour.dullmer.de/images/icons/logo.ico"
           },
         },
       });
