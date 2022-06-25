@@ -54,6 +54,7 @@ window.onload = function(){
     subSetTour();
 };
 
+// Function toggle the popup that displays search filters
 function toggleFilter(){
     let popup = document.getElementById("popup-filter-elements");
     if (popup.style.display == "none"){
@@ -63,6 +64,7 @@ function toggleFilter(){
     }
 }
 
+// Function to reset all set search filters
 function resetFilter(){
     document.getElementById("difficulty").selectedIndex = 0;
     document.getElementById("minDist").value = "";
@@ -72,6 +74,7 @@ function resetFilter(){
     document.getElementById("location").value = "";
 }
 
+// Regex to only allow numberss
 function checkNumberFilter(element, e){
     let re = /^(0|[1-9][0-9]*)$/;
     if (re.test(element.value) == false) {
@@ -80,6 +83,7 @@ function checkNumberFilter(element, e){
     }
 }
 
+// Only allow values below upper value
 function lessThanRange(element, upper){
     if(upper.value != ""){
         if(parseInt(element.value) > parseInt(upper.value)){
@@ -88,6 +92,7 @@ function lessThanRange(element, upper){
     }
 }
 
+// Only allow values abovew lower value
 function moreThanRange(element, lower){
     if(lower.value != ""){
         if(parseInt(element.value) < parseInt(lower.value)){
@@ -96,6 +101,7 @@ function moreThanRange(element, lower){
     }
 }
 
+// Process filters and get subset of tours
 function subSetTour(){
     clearTours();
     let elements = {"difficulty-min" : "minDifficulty", "difficulty-max" : "maxDifficulty", "minDist" : "minDistance", "maxDist" : "maxDistance", "minDur" : "minDuration", "maxDur" : "maxDuration", "location" : "location", "search_input" : "searchQuery"};
@@ -128,6 +134,7 @@ function buildImgUrl(tourID, imageID) {
     return `${window.BASEURL}/tours/${tourID}/image/${imageID}`;
 }
 
+// Function to add tour to a list
 function AddTourToList(tour) 
 {
     var grid = document.getElementById("SearchGrid");
@@ -164,8 +171,8 @@ function clearTours(){
     grid.innerHTML = '';
 }
 
+// set html elements for a tour
 function CreateTourArticle(image, name, difficulty, distance, duration, location, tid) {
-
     var container = document.createElement('div');
     var div_card = document.createElement('div');
     var div_card_header = document.createElement('div');
@@ -174,9 +181,7 @@ function CreateTourArticle(image, name, difficulty, distance, duration, location
     var h3 = document.createElement('h3');
     var h4 = document.createElement('h4');
     var p = document.createElement('p');
-    var button = document.createElement('button');
-
-
+    var button = document.createElement('button')
    
     img.src = image;
     container.classList.add("tour-container");

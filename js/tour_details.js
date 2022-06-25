@@ -64,6 +64,7 @@ async function init_crypto() {
     loadGPX();
 }
 
+//Populate content of tour items
 async function populateSite() {
     tour_name.innerHTML = tour.title;
     tour_description.innerHTML = tour.description;
@@ -130,12 +131,13 @@ async function populateSite() {
         });
 }
 
+// Get Url of images specified by their tour ID and image ID
 function buildImgUrl(tourID, imageID) {
     return `${window.BASEURL}/tours/${tourID}/image/${imageID}`;
 }
 
 async function getPriceAndParams() {
-    // Preis von Contract abrufen
+    // Get Price of Contract
     var result = await CrypTourWeb.getSpotPrice(tour.bpoolAddress, tour.tokenAddress);
     var conversion_result = await (await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ocean-protocol&vs_currencies=EUR")).json();
     var conversion_rate = conversion_result["ocean-protocol"]["eur"];
@@ -144,14 +146,14 @@ async function getPriceAndParams() {
     var euro_price = parseFloat(ocean_price * conversion_rate).toFixed(2);
     tour_price[0].innerHTML = `<b>${ocean_price} OCEAN</b> ≈ ${euro_price} €`;
 
-    // get recommended params for kauf???
-    // TODO: was macht die 1 in .toWei??
+    // Get Parameters of Tour
     var res = await CrypTourWeb.recommParamsForGetTT(tour.bpoolAddress, tour.tokenAddress, CrypTourWeb.web3Provider.utils.toWei("1"));
     priceWei = res.result.spotPrice.wei;
     maxAmountIn = res.result.maxAmountIn.wei;
     maxPrice = res.result.maxPrice.wei;
 }
 
+//Check wether user owns the tour and set items accordingly
 async function checkOwnsTour() {
     var result = await fetch(`${window.BASEURL}/tours/${tourID}/gpx`, {credentials: 'include'});
     var owns = result.status == 200;
@@ -178,7 +180,7 @@ async function checkOwnsTour() {
 }
 
 async function buyToken() {
-    // status anschalten
+    // status turn on
     status_container.classList.remove("status-hidden");
     buying_status.classList.remove("status-error");
     buy_spinner.style.display = "inline-block";
@@ -210,6 +212,7 @@ async function buyToken() {
     sendToken();
 }
 
+// Load the gpx file and set map leaflet map
 function loadGPX(){
     let opts = {
         map: {
@@ -239,6 +242,7 @@ function loadGPX(){
       }).addTo(map);
 }
 
+// Send Token and process result
 function sendToken() {
     CrypTourWeb.consumeTT(tour.tokenAddress, tour.tID)
         .then((res) => {
@@ -254,6 +258,7 @@ function sendToken() {
         })
 }
 
+// Download the specified GPX file
 function downloadGpx() {
     fetch(`${window.BASEURL}/tours/${tourID}/gpx`, {credentials: 'include'})
         .then(response => response.blob())
@@ -268,6 +273,7 @@ function downloadGpx() {
         });
 }
 
+// Add the token to the specified wallet
 function addTokenToWallet() {
     try {
       ethereum.request({
@@ -287,6 +293,7 @@ function addTokenToWallet() {
     }
 }
 
+// Send rating for a tour
 function send_rating() {
     var rating_numer = document.querySelector('input[name="rating"]:checked').value;;
     var rating_obj =
